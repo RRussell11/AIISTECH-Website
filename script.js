@@ -100,11 +100,15 @@ function sendMessage() {
     // Clear input
     chatInput.value = '';
     
+    // Show typing indicator
+    showTypingIndicator();
+    
     // Simulate AI response after a short delay
     setTimeout(() => {
+        removeTypingIndicator();
         const randomResponse = aiResponses[Math.floor(Math.random() * aiResponses.length)];
         addMessage(randomResponse, 'ai');
-    }, 1000);
+    }, 1500);
 }
 
 function addMessage(text, sender) {
@@ -205,30 +209,6 @@ function removeTypingIndicator() {
         indicator.remove();
     }
 }
-
-// Update sendMessage to use typing indicator
-const originalSendMessage = sendMessage;
-sendMessage = function() {
-    const message = chatInput.value.trim();
-    
-    if (message === '') return;
-    
-    // Add user message
-    addMessage(message, 'user');
-    
-    // Clear input
-    chatInput.value = '';
-    
-    // Show typing indicator
-    const typingIndicator = showTypingIndicator();
-    
-    // Simulate AI response after a short delay
-    setTimeout(() => {
-        removeTypingIndicator();
-        const randomResponse = aiResponses[Math.floor(Math.random() * aiResponses.length)];
-        addMessage(randomResponse, 'ai');
-    }, 1500);
-};
 
 // Add CSS for typing indicator dots animation
 const style = document.createElement('style');

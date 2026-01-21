@@ -177,13 +177,13 @@ html {
 
 @keyframes float {
     0%, 100% {
-        transform: translate(0, 0);
+        transform: translate(-50%, -50%);
     }
     33% {
-        transform: translate(50px, 50px);
+        transform: translate(calc(-50% + 50px), calc(-50% + 50px));
     }
     66% {
-        transform: translate(-50px, -50px);
+        transform: translate(calc(-50% - 50px), calc(-50% - 50px));
     }
 }
 
