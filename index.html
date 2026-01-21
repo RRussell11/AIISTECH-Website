@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="AIISTECH Projects Showcase - Powered by Google Gemini AI">
+    <title>AIISTECH Projects - AI-Powered Showcase</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <h1 class="logo">🤖 AIISTECH Projects</h1>
+                <p class="tagline">Powered by Google Gemini AI</p>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h2 class="hero-title">AI-Powered Project Showcase</h2>
+            <p class="hero-subtitle">
+                Explore our projects with intelligent insights and analysis powered by Google Gemini AI
+            </p>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section class="section projects-section">
+        <div class="container">
+            <h2 class="section-title">Our Projects</h2>
+            <div id="projects-grid" class="projects-grid">
+                <!-- Projects will be dynamically loaded here -->
+                <div class="loading-container">
+                    <div class="spinner"></div>
+                    <p>Loading projects...</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Insights Section -->
+    <section class="section insights-section" id="insights-section">
+        <div class="container">
+            <h2 class="section-title">AI-Generated Insights</h2>
+            <p class="section-description">Deep analysis and recommendations powered by Gemini AI</p>
+            <div id="insights-container" class="insights-container">
+                <p class="info-text">Click "Generate Insights" on any project card to see AI-powered analysis</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Chatbot Section -->
+    <section class="section chatbot-section">
+        <div class="container">
+            <h2 class="section-title">AI Project Assistant</h2>
+            <p class="section-description">Ask me anything about the AIISTECH projects</p>
+            
+            <div class="chat-container">
+                <div id="chat-messages" class="chat-messages">
+                    <div class="message bot-message">
+                        <div class="message-avatar">🤖</div>
+                        <div class="message-content">
+                            <p>Hello! I'm your AI assistant powered by Google Gemini. I can help you learn about the AIISTECH projects, compare their features, and answer technical questions. What would you like to know?</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="chat-input-container">
+                    <input 
+                        type="text" 
+                        id="chat-input" 
+                        class="chat-input" 
+                        placeholder="Ask about the projects..."
+                        autocomplete="off"
+                    >
+                    <button id="send-button" class="send-button">
+                        <span class="send-icon">➤</span>
+                    </button>
+                    <button id="clear-chat" class="clear-button" title="Clear chat history">
+                        <span>🗑️</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2026 AIISTECH. Powered by Google Gemini AI.</p>
+            <p class="footer-links">
+                <a href="https://github.com/RRussell11" target="_blank" rel="noopener">GitHub</a>
+                <span class="separator">•</span>
+                <a href="https://ai.google.dev/" target="_blank" rel="noopener">Gemini AI</a>
+            </p>
+        </div>
+    </footer>
+
+    <!-- Config Notice Modal -->
+    <div id="config-modal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <h3>⚠️ Configuration Required</h3>
+            <p>To use this website, you need to configure your Google Gemini API key.</p>
+            <ol>
+                <li>Get a free API key at: <a href="https://makersuite.google.com/app/apikey" target="_blank" rel="noopener">Google AI Studio</a></li>
+                <li>Copy <code>js/config.example.js</code> to <code>js/config.js</code></li>
+                <li>Replace <code>YOUR_API_KEY_HERE</code> with your actual API key</li>
+                <li>Reload the page</li>
+            </ol>
+            <button onclick="document.getElementById('config-modal').style.display='none'" class="modal-button">
+                I understand
+            </button>
+        </div>
+    </div>
+
+    <script src="js/config.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
