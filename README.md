@@ -56,14 +56,3 @@ This repository contains the client-facing marketing website for AIITech Org, an
 - **CRM**: HubSpot (free tier) or Mailchimp - Email automation
 - **Scheduling**: [Calendly](https://calendly.com/) - Demo booking integration
 
-## Design System
-
-### Colors
-```css
---primary: #38bdf8;      /* Teal accent */
---dark-bg: #0f172a;      /* Charcoal */
---white: #f1f5f9;        /* Off-white text */
---accent: #1e293b;       /* Slightly lighter dark */
---success: #22c55e;      /* Green for positive metrics */
---warning: #f59e0b;      /* Amber for caution states */
-
