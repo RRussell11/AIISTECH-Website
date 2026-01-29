@@ -1,0 +1,16 @@
+SCREENSHOT INSTRUCTIONS
+======================
+
+To complete the WordPress theme, you need to add a screenshot.png file.
+
+Recommended specifications:
+- Dimensions: 1200x900 pixels
+- Format: PNG
+- Shows a preview of the theme's homepage
+
+You can create this by:
+1. Taking a screenshot of your website homepage
+2. Resizing it to 1200x900 pixels
+3. Saving it as 'screenshot.png' in the theme root directory
+
+For now, a placeholder can be created with any image editor or online tool.
