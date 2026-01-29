@@ -1,20 +1,56 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
-</div>
+# AIITech Website
 
-# Run and deploy your AI Studio app
+**AI-Native Automation + PSA Platform for Mid-Market Enterprises**
 
-This contains everything you need to run your app locally.
+![Status](https://img.shields.io/badge/status-active-brightgreen)
+![License](https://img.shields.io/badge/license-MIT-blue)
+![Node](https://img.shields.io/badge/node-18.x-green)
+![Next.js](https://img.shields.io/badge/next.js-14.x-black)
 
-View your app in AI Studio: https://ai.studio/apps/drive/1oxVp-2hUy-fuSCs9eVmYlZGdoZnhKSy4
+---
 
-## Run Locally
+## 📋 Overview
 
-**Prerequisites:**  Node.js
+This is the public-facing website for **AIITech Automation** – an intelligent automation consulting and PSA platform company targeting mid-market enterprises (500–5,000 employees) in healthcare, manufacturing, and BFSI verticals.
 
+### Key Objectives
+- Generate qualified leads (5–10/month target) via assessment sign-ups
+- Educate market on intelligent automation (agentic AI + RPA)
+- Build thought leadership through blog + case studies
+- Showcase platform capabilities and service offerings
+- Drive 280% ROI narrative
 
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+### Website URL
+- **Production**: [aiitech.com](https://aiitech.com)
+- **Staging**: [staging.aiitech.com](https://staging.aiitech.com)
+
+---
+
+## 🚀 Quick Start
+
+### Prerequisites
+- Node.js 18.x or higher
+- npm 9.x or higher (or yarn/pnpm)
+- Git
+
+### Installation
+
+```bash
+# Clone repository
+git clone https://github.com/aiitech/website.git
+cd website
+
+# Install dependencies
+npm install
+
+# Create .env.local from template
+cp .env.example .env.local
+
+# Add required environment variables
+# See Configuration section below
+
+# Run development server
+npm run dev
+
+# Open browser
+# Visit http://localhost:3000
