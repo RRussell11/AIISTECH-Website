@@ -1,51 +1,58 @@
-# ΛProof Website
+# AIISTECH Website
 
-This repository contains the marketing and information site for ΛProof, a proof-first personal computing stack focused on lawful, ethically constrained, and user-sovereign state transitions.
+**AI-Native Automation + PSA Platform for Mid-Market Enterprises**
 
-## Overview
+![Status](https://img.shields.io/badge/status-active-brightgreen)
+![License](https://img.shields.io/badge/license-MIT-blue)
+![Node](https://img.shields.io/badge/node-18.x-green)
+![Next.js](https://img.shields.io/badge/next.js-14.x-black)
 
-The site highlights the core ideas behind ΛProof and the broader Web4 vision:
+---
 
-- **Proof-first computing:** every state transition must be provably lawful and accountable.
-- **Ethical invariants:** systems are designed to respect privacy, agency, and transparent governance.
-- **Developer pathways:** guidance for builders exploring the ΛProof paper and protocols.
+## 📋 Overview
 
-Key sections include the hero narrative, the problem statement, protocol and guarantee overviews, a constitution for accountability, and calls-to-action for developers.
+This is the public-facing website for **AIISTECH Automation** – an intelligent automation consulting and PSA platform company targeting mid-market enterprises (500–5,000 employees) in healthcare, manufacturing, and BFSI verticals.
 
-## Tech stack
+### Key Objectives
+- Generate qualified leads (5–10/month target) via assessment sign-ups
+- Educate market on intelligent automation (agentic AI + RPA)
+- Build thought leadership through blog + case studies
+- Showcase platform capabilities and service offerings
+- Drive 280% ROI narrative
 
-- Vite
-- React + TypeScript
-- Tailwind CSS + shadcn/ui
-- TanStack Query
+### Website URL
+- **Production**: [AIISTECH.com](https://AIISTECH.com)
+- **Staging**: [staging.AIISTECH.com](https://staging.AIISTECH.com)
 
-## Getting started
+---
 
-1. Install dependencies:
-   ```sh
-   npm install
-   ```
-2. Start the development server with hot reloading:
-   ```sh
-   npm run dev
-   ```
-3. Build for production:
-   ```sh
-   npm run build
-   ```
-4. Preview the production build locally:
-   ```sh
-   npm run preview
-   ```
+## 🚀 Quick Start
 
-## Project structure
+### Prerequisites
+- Node.js 18.x or higher
+- npm 9.x or higher (or yarn/pnpm)
+- Git
 
-- `src/pages/Index.tsx` – top-level page composition and routing.
-- `src/components/` – UI sections such as the hero, problem statement, guarantees, protocols, and CTA.
-- `public/` – static assets served as-is.
+### Installation
 
-## Contributing
+```bash
+# Clone repository
+git clone https://github.com/AIISTECH/website.git
+cd website
 
-1. Create a new branch for your changes.
-2. Ensure the development server runs without errors (`npm run dev`).
-3. Commit your work with clear messages and open a pull request for review.
+# Install dependencies
+npm install
+
+# Create .env.local from template
+cp .env.example .env.local
+
+# Add required environment variables
+# See Configuration section below
+
+# Run development server
+npm run dev
+
+# Open browser
+# Visit http://localhost:3000
+
+
