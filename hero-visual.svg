@@ -1,0 +1,35 @@
+<svg width="1200" height="800" viewBox="0 0 1200 800" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="grad1" x1="0" y1="0" x2="1200" y2="800" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#7C3AED" stop-opacity="0.15" />
+      <stop offset="1" stop-color="#22D3EE" stop-opacity="0.2" />
+    </linearGradient>
+    <linearGradient id="grad2" x1="200" y1="100" x2="1000" y2="700" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#A855F7" stop-opacity="0.35" />
+      <stop offset="1" stop-color="#22C55E" stop-opacity="0.2" />
+    </linearGradient>
+    <filter id="blur" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="80" />
+    </filter>
+  </defs>
+  <rect width="1200" height="800" rx="32" fill="#0B1021" />
+  <rect width="1200" height="800" rx="32" fill="url(#grad1)" />
+  <circle cx="300" cy="260" r="220" fill="#8B5CF6" filter="url(#blur)" opacity="0.45" />
+  <circle cx="900" cy="520" r="260" fill="#22D3EE" filter="url(#blur)" opacity="0.4" />
+  <circle cx="600" cy="360" r="180" fill="#22C55E" filter="url(#blur)" opacity="0.3" />
+  <rect x="200" y="220" width="800" height="360" rx="32" fill="#0F172A" stroke="#22D3EE" stroke-opacity="0.4" stroke-width="2" />
+  <rect x="240" y="260" width="720" height="280" rx="20" fill="#111827" stroke="#7C3AED" stroke-opacity="0.5" stroke-width="2" />
+  <path d="M320 480 C420 360 520 520 620 420 C720 320 820 480 920 360" stroke="#22D3EE" stroke-width="6" stroke-linecap="round" stroke-opacity="0.85" fill="none" />
+  <path d="M320 420 C420 300 520 460 620 360 C720 260 820 420 920 300" stroke="#A855F7" stroke-width="6" stroke-linecap="round" stroke-opacity="0.65" fill="none" />
+  <path d="M320 540 C420 420 520 580 620 480 C720 380 820 540 920 420" stroke="#22C55E" stroke-width="6" stroke-linecap="round" stroke-opacity="0.6" fill="none" />
+  <rect x="360" y="320" width="160" height="120" rx="16" fill="#0B1021" stroke="#22D3EE" stroke-width="2" opacity="0.8" />
+  <rect x="540" y="320" width="160" height="120" rx="16" fill="#0B1021" stroke="#A855F7" stroke-width="2" opacity="0.8" />
+  <rect x="720" y="320" width="160" height="120" rx="16" fill="#0B1021" stroke="#22C55E" stroke-width="2" opacity="0.8" />
+  <circle cx="440" cy="380" r="10" fill="#22D3EE" />
+  <circle cx="620" cy="380" r="10" fill="#A855F7" />
+  <circle cx="800" cy="380" r="10" fill="#22C55E" />
+  <text x="400" y="410" fill="#E5E7EB" font-family="'Inter', 'Segoe UI', sans-serif" font-size="20" font-weight="600" opacity="0.85">Identity</text>
+  <text x="580" y="410" fill="#E5E7EB" font-family="'Inter', 'Segoe UI', sans-serif" font-size="20" font-weight="600" opacity="0.85">Proof</text>
+  <text x="770" y="410" fill="#E5E7EB" font-family="'Inter', 'Segoe UI', sans-serif" font-size="20" font-weight="600" opacity="0.85">Archivum</text>
+  <text x="300" y="620" fill="#94A3B8" font-family="'Inter', 'Segoe UI', sans-serif" font-size="18" opacity="0.8">Verifiable state transitions • Ethical constraints • User sovereignty</text>
+</svg>
