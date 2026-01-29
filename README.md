@@ -1,4 +1,4 @@
-# AIITech Website
+# AIISTECH Website
 
 **AI-Native Automation + PSA Platform for Mid-Market Enterprises**
 
@@ -11,7 +11,7 @@
 
 ## 📋 Overview
 
-This is the public-facing website for **AIITech Automation** – an intelligent automation consulting and PSA platform company targeting mid-market enterprises (500–5,000 employees) in healthcare, manufacturing, and BFSI verticals.
+This is the public-facing website for **AIISTECH Automation** – an intelligent automation consulting and PSA platform company targeting mid-market enterprises (500–5,000 employees) in healthcare, manufacturing, and BFSI verticals.
 
 ### Key Objectives
 - Generate qualified leads (5–10/month target) via assessment sign-ups
@@ -21,8 +21,8 @@ This is the public-facing website for **AIITech Automation** – an intelligent 
 - Drive 280% ROI narrative
 
 ### Website URL
-- **Production**: [aiitech.com](https://aiitech.com)
-- **Staging**: [staging.aiitech.com](https://staging.aiitech.com)
+- **Production**: [AIISTECH.com](https://AIISTECH.com)
+- **Staging**: [staging.AIISTECH.com](https://staging.AIISTECH.com)
 
 ---
 
@@ -37,7 +37,7 @@ This is the public-facing website for **AIITech Automation** – an intelligent 
 
 ```bash
 # Clone repository
-git clone https://github.com/aiitech/website.git
+git clone https://github.com/RRussell11/AIISTECH-Website.git
 cd website
 
 # Install dependencies
@@ -54,3 +54,5 @@ npm run dev
 
 # Open browser
 # Visit http://localhost:3000
+
+
