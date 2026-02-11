@@ -10,6 +10,7 @@ yarn.lock
 dist/
 build/
 .cache/
+*.log
 
 # Environment files
 .env
@@ -17,6 +18,7 @@ build/
 .env.development.local
 .env.test.local
 .env.production.local
+.env*.local
 
 # Editor directories and files
 .vscode/
@@ -47,3 +49,8 @@ Thumbs.db
 screenshot-instructions.txt
 *.tmp
 *.log
+
+# Documentation drafts
+*draft*.md
+*-draft.md
+*TODO*.md
