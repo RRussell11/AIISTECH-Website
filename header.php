@@ -143,6 +143,7 @@ function aiistech_default_menu() {
     <a href="<?php echo esc_url(home_url('/solutions')); ?>" class="text-sm font-medium transition-colors text-aiistech-white/70 hover:text-aiistech-primary"><?php esc_html_e('Solutions', 'aiistech'); ?></a>
     <a href="<?php echo esc_url(home_url('/services')); ?>" class="text-sm font-medium transition-colors text-aiistech-white/70 hover:text-aiistech-primary"><?php esc_html_e('Services', 'aiistech'); ?></a>
     <a href="<?php echo esc_url(home_url('/pricing')); ?>" class="text-sm font-medium transition-colors text-aiistech-white/70 hover:text-aiistech-primary"><?php esc_html_e('Pricing', 'aiistech'); ?></a>
+    <a href="https://aistudio.google.com" target="_blank" rel="noopener noreferrer" class="text-sm font-medium transition-colors text-aiistech-white/70 hover:text-aiistech-primary"><?php esc_html_e('AI Studio', 'aiistech'); ?></a>
     <a href="<?php echo esc_url(home_url('/blog')); ?>" class="text-sm font-medium transition-colors text-aiistech-white/70 hover:text-aiistech-primary"><?php esc_html_e('Resources', 'aiistech'); ?></a>
     <?php
 }
@@ -156,6 +157,7 @@ function aiistech_default_menu_mobile() {
     <a href="<?php echo esc_url(home_url('/solutions')); ?>" class="text-left text-lg font-medium text-white/80"><?php esc_html_e('Solutions', 'aiistech'); ?></a>
     <a href="<?php echo esc_url(home_url('/services')); ?>" class="text-left text-lg font-medium text-white/80"><?php esc_html_e('Services', 'aiistech'); ?></a>
     <a href="<?php echo esc_url(home_url('/pricing')); ?>" class="text-left text-lg font-medium text-white/80"><?php esc_html_e('Pricing', 'aiistech'); ?></a>
+    <a href="https://aistudio.google.com" target="_blank" rel="noopener noreferrer" class="text-left text-lg font-medium text-white/80"><?php esc_html_e('AI Studio', 'aiistech'); ?></a>
     <a href="<?php echo esc_url(home_url('/blog')); ?>" class="text-left text-lg font-medium text-white/80"><?php esc_html_e('Resources', 'aiistech'); ?></a>
     <?php
 }

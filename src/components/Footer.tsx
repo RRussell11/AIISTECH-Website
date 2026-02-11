@@ -6,6 +6,7 @@ export const Footer = () => {
 
   const links = [
     { label: "Paper", href: whitepaperUrl, external: true },
+    { label: "AI Studio", href: "https://aistudio.google.com", external: true },
     { label: "Docs", href: "#developers" },
     { label: "Contact", href: "#contact" },
   ];
