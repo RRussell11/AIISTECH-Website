@@ -22,6 +22,7 @@ export const Header = () => {
     { label: "How it Works", href: "#how-it-works" },
     { label: "Protocols", href: "#protocols" },
     { label: "Developers", href: "#developers" },
+    { label: "AI Studio", href: "https://aistudio.google.com", external: true },
     { label: "Paper", href: whitepaperUrl, external: true },
   ];
 
