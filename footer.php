@@ -114,7 +114,7 @@ if (!defined('ABSPATH')) {
                 <div class="mt-4">
                     <a href="https://github.com/google-gemini/aistudio-repository-template" 
                        target="_blank" 
-                       rel="noopener noreferrer" 
+                       rel="noopener noreferrer nofollow" 
                        class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-aiistech-accent/30 hover:bg-aiistech-accent/50 text-aiistech-white/70 hover:text-aiistech-primary transition-all duration-300 text-xs border border-aiistech-primary/20 hover:border-aiistech-primary/40"
                        aria-label="<?php esc_attr_e('Built with Google AI Studio template', 'aiistech'); ?>">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
