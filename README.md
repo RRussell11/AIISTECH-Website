@@ -1,3 +1,5 @@
+[![generated from google-gemini/aistudio-repository-template](https://img.shields.io/badge/generated%20from-google--gemini%2Faistudio--repository--template-blue?style=flat-square&logo=github)](https://github.com/google-gemini/aistudio-repository-template)
+
 # AIISTECH Website
 
 **AI-Native Automation + PSA Platform for Mid-Market Enterprises**
