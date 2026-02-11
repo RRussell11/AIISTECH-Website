@@ -23,7 +23,8 @@ import {
   ShieldCheck,
   ChevronDown,
   ExternalLink,
-  Play
+  Play,
+  Info
 } from 'lucide-react';
 
 // --- Types ---
@@ -150,6 +151,20 @@ const Footer = ({ setPage }: { setPage: (p: Page) => void }) => (
         <span className="hover:text-white cursor-pointer">Terms of Service</span>
         <span className="hover:text-white cursor-pointer">Security</span>
       </div>
+    </div>
+    
+    {/* Google AI Studio Badge */}
+    <div className="text-center py-4 border-t border-white/10 max-w-7xl mx-auto mt-8">
+      <a 
+        href="https://github.com/google-gemini/aistudio-repository-template"
+        target="_blank"
+        rel="noopener noreferrer nofollow"
+        className="inline-flex items-center gap-2 text-sm text-aiistech-white/60 hover:text-aiistech-primary transition-colors"
+        aria-label="Powered by Google AI Studio"
+      >
+        <Info className="w-4 h-4" />
+        <span>Powered by Google AI Studio</span>
+      </a>
     </div>
   </footer>
 );
