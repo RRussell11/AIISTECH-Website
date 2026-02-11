@@ -110,6 +110,21 @@ if (!defined('ABSPATH')) {
                         the_privacy_policy_link();
                     } ?>
                 </p>
+                <!-- Google AI Studio Badge -->
+                <div class="mt-4">
+                    <a href="https://github.com/google-gemini/aistudio-repository-template" 
+                       target="_blank" 
+                       rel="noopener noreferrer nofollow" 
+                       class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-aiistech-accent/30 hover:bg-aiistech-accent/50 text-aiistech-white/70 hover:text-aiistech-primary transition-all duration-300 text-xs border border-aiistech-primary/20 hover:border-aiistech-primary/40"
+                       aria-label="<?php esc_attr_e('Built with Google AI Studio template', 'aiistech'); ?>">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <circle cx="12" cy="12" r="10"/>
+                            <path d="M12 16v-4"/>
+                            <path d="M12 8h.01"/>
+                        </svg>
+                        <span><?php esc_html_e('Powered by Google AI Studio', 'aiistech'); ?></span>
+                    </a>
+                </div>
             </div>
         </div>
     </footer>
