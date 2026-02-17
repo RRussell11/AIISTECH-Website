@@ -56,10 +56,11 @@ class ApiService {
 
             return this.api(originalRequest);
           } catch (refreshError) {
-            // Refresh failed - clear storage and redirect to login
+            // Refresh failed - clear storage and emit logout event
             localStorage.removeItem('accessToken');
             localStorage.removeItem('refreshToken');
-            window.location.href = '/login';
+            // Dispatch a custom event that AuthContext can listen to
+            window.dispatchEvent(new CustomEvent('auth:logout'));
             return Promise.reject(refreshError);
           }
         }

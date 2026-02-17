@@ -30,6 +30,15 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     };
 
     initAuth();
+
+    // Listen for logout events from API service
+    const handleAuthLogout = () => {
+      setUser(null);
+      setToken(null);
+    };
+
+    window.addEventListener('auth:logout', handleAuthLogout);
+    return () => window.removeEventListener('auth:logout', handleAuthLogout);
   }, [token]);
 
   const login = async (credentials: LoginCredentials) => {
@@ -64,8 +73,6 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     } finally {
       setUser(null);
       setToken(null);
-      localStorage.removeItem('accessToken');
-      localStorage.removeItem('refreshToken');
     }
   };
 

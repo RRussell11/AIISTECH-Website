@@ -1,5 +1,5 @@
 import React from 'react';
-import { Navigate, useLocation } from 'react-router-dom';
+import { Navigate, useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from '@/contexts/AuthContext';
 import { UserRole } from '@/types/auth.types';
 
@@ -11,6 +11,7 @@ interface ProtectedRouteProps {
 export const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children, roles }) => {
   const { isAuthenticated, isLoading, hasRole } = useAuth();
   const location = useLocation();
+  const navigate = useNavigate();
 
   if (isLoading) {
     return (
@@ -35,12 +36,12 @@ export const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children, roles 
           <p className="text-slate-400 mb-6">
             You don't have permission to access this page.
           </p>
-          <a
-            href="/dashboard"
+          <button
+            onClick={() => navigate('/dashboard')}
             className="inline-block px-6 py-3 bg-aiistech-primary text-aiistech-dark font-bold rounded-lg hover:opacity-90 transition"
           >
             Go to Dashboard
-          </a>
+          </button>
         </div>
       </div>
     );
