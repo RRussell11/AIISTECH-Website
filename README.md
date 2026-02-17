@@ -64,15 +64,18 @@ npm run dev
 
 ### Local Development
 
-1. Start the backend API:
+**See [BACKEND_CONNECTION.md](./BACKEND_CONNECTION.md) for complete setup guide**
+
+1. Start the mock backend API:
    ```bash
-   cd backend
-   docker-compose up -d
-   npm run start:dev
+   cd mock-backend
+   npm install  # First time only
+   npm start
    ```
 
 2. Start the frontend:
    ```bash
+   npm install  # First time only
    npm run dev
    ```
 
