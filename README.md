@@ -110,4 +110,21 @@ The frontend is now connected to the backend Identity & Access Service:
 - `GET /api/auth/me` - Get current user
 - `POST /api/auth/logout` - User logout
 
+## 📖 System Documentation
+
+### Understanding the Architecture
+
+- **[HOW_IT_WORKS.md](./HOW_IT_WORKS.md)** - Quick summary of frontend-backend integration
+- **[SYSTEM_INTEGRATION_GUIDE.md](./SYSTEM_INTEGRATION_GUIDE.md)** - Comprehensive technical guide with diagrams
+- **[BACKEND_CONNECTION.md](./BACKEND_CONNECTION.md)** - Backend API setup and testing
+- **[GOOGLE_AI_INTEGRATION.md](./GOOGLE_AI_INTEGRATION.md)** - Google AI Studio integration status
+
+### Quick Links
+
+| Document | Description | Best For |
+|----------|-------------|----------|
+| [HOW_IT_WORKS.md](./HOW_IT_WORKS.md) | 5-minute overview | Quick understanding |
+| [SYSTEM_INTEGRATION_GUIDE.md](./SYSTEM_INTEGRATION_GUIDE.md) | Complete architecture | Developers |
+| [BACKEND_CONNECTION.md](./BACKEND_CONNECTION.md) | API documentation | Testing & Setup |
+
 ---
