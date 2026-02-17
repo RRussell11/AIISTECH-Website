@@ -55,6 +55,56 @@ cp .env.example .env.local
 npm run dev
 
 # Open browser
-# Visit http://localhost:3000
+# Visit http://localhost:8080
+```
 
+---
 
+## 🔐 Authentication
+
+### Local Development
+
+1. Start the backend API:
+   ```bash
+   cd backend
+   docker-compose up -d
+   npm run start:dev
+   ```
+
+2. Start the frontend:
+   ```bash
+   npm run dev
+   ```
+
+3. Login with demo credentials:
+   - **Executive**: exec@aiistech.com / password123
+   - **Finance**: finance@aiistech.com / password123
+   - **Operations**: ops@aiistech.com / password123
+   - **IT**: it@aiistech.com / password123
+
+### Environment Setup
+
+Copy `.env.example` to `.env` and configure:
+
+```env
+VITE_API_URL=http://localhost:3001/api
+```
+
+## 🔗 API Integration
+
+The frontend is now connected to the backend Identity & Access Service:
+
+- ✅ JWT Authentication
+- ✅ Multi-tenant support
+- ✅ Role-based access control
+- ✅ Auto token refresh
+- ✅ Protected routes
+
+### API Endpoints Used
+
+- `POST /api/auth/login` - User login
+- `POST /api/auth/refresh` - Token refresh
+- `GET /api/auth/me` - Get current user
+- `POST /api/auth/logout` - User logout
+
+---
