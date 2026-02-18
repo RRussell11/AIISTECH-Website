@@ -1,5 +1,6 @@
 # Node.js dependencies
 node_modules/
+mock-backend/node_modules/
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*

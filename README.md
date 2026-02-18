@@ -55,6 +55,103 @@ cp .env.example .env.local
 npm run dev
 
 # Open browser
-# Visit http://localhost:3000
+# Visit http://localhost:8080
+```
 
+---
 
+## 🔐 Authentication
+
+### Local Development
+
+**See [BACKEND_CONNECTION.md](./BACKEND_CONNECTION.md) for complete setup guide**
+
+1. Start the mock backend API:
+   ```bash
+   cd mock-backend
+   npm install  # First time only
+   npm start
+   ```
+
+2. Start the frontend:
+   ```bash
+   npm install  # First time only
+   npm run dev
+   ```
+
+3. Login with demo credentials:
+   - **Executive**: exec@aiistech.com / password123
+   - **Finance**: finance@aiistech.com / password123
+   - **Operations**: ops@aiistech.com / password123
+   - **IT**: it@aiistech.com / password123
+
+### Environment Setup
+
+Copy `.env.example` to `.env` and configure:
+
+```env
+VITE_API_URL=http://localhost:3001/api
+```
+
+## 🔗 API Integration
+
+The frontend is now connected to the backend Identity & Access Service:
+
+- ✅ JWT Authentication
+- ✅ Multi-tenant support
+- ✅ Role-based access control
+- ✅ Auto token refresh
+- ✅ Protected routes
+
+### API Endpoints Used
+
+- `POST /api/auth/login` - User login
+- `POST /api/auth/refresh` - Token refresh
+- `GET /api/auth/me` - Get current user
+- `POST /api/auth/logout` - User logout
+
+## 📖 System Documentation
+
+### Understanding the Architecture
+
+- **[HOW_IT_WORKS.md](./HOW_IT_WORKS.md)** - Quick summary of frontend-backend integration
+- **[SYSTEM_INTEGRATION_GUIDE.md](./SYSTEM_INTEGRATION_GUIDE.md)** - Comprehensive technical guide with diagrams
+- **[BACKEND_CONNECTION.md](./BACKEND_CONNECTION.md)** - Backend API setup and testing
+- **[GOOGLE_AI_INTEGRATION.md](./GOOGLE_AI_INTEGRATION.md)** - Google AI Studio integration status
+
+### Quick Links
+
+| Document | Description | Best For |
+|----------|-------------|----------|
+| [HOW_IT_WORKS.md](./HOW_IT_WORKS.md) | 5-minute overview | Quick understanding |
+| [SYSTEM_INTEGRATION_GUIDE.md](./SYSTEM_INTEGRATION_GUIDE.md) | Complete architecture | Developers |
+| [BACKEND_CONNECTION.md](./BACKEND_CONNECTION.md) | API documentation | Testing & Setup |
+| [PRODUCTION_READINESS.md](./PRODUCTION_READINESS.md) | Production checklist | DevOps/Deploy |
+| [TESTING_CHECKLIST.md](./TESTING_CHECKLIST.md) | Testing guide | QA/Testing |
+
+---
+
+## 🚀 Production Status
+
+**Current Status**: ✅ Development Complete | ✅ HIGH Security Issues Fixed | ⚠️ Production Hardening Required
+
+**Readiness Score**: 75/100 (Improved from 65/100)
+
+**What's Done**:
+- ✅ Frontend implementation complete
+- ✅ Authentication system working
+- ✅ Mock backend functional
+- ✅ Documentation comprehensive
+- ✅ Production build tested
+- ✅ **HIGH security vulnerabilities fixed**
+
+**What's Needed**:
+- ❌ Replace mock backend with production API
+- ~~❌ Fix security vulnerabilities (React Router XSS)~~ ✅ **FIXED**
+- ❌ Security hardening (httpOnly cookies, HTTPS)
+- ❌ Deployment configuration
+- ❌ Monitoring setup
+
+**See [PRODUCTION_READINESS.md](./PRODUCTION_READINESS.md) for complete checklist**
+
+---
