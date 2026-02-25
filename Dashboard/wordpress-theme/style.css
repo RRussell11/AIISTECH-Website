@@ -1,0 +1,31 @@
+/*
+Theme Name: AI ITECH Dashboard
+Theme URI: https://github.com/RRussell11/aiitech-project2
+Description: WordPress theme for AI ITECH Dashboard - A modern AI automation command center
+Version: 1.0.0
+Author: AI ITECH
+Author URI: https://ai.studio
+License: Apache-2.0
+License URI: http://www.apache.org/licenses/LICENSE-2.0
+Text Domain: aiitech-dashboard
+Tags: dashboard, react, automation, admin
+*/
+
+/* Basic WordPress theme styles */
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.site-main {
+  margin: 0;
+  padding: 0;
+}
+
+/* Full-width container for the React app */
+.aiitech-dashboard-container {
+  width: 100%;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+}
