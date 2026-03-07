@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
+import { useQueryClient } from '@tanstack/react-query';
 import { authService } from '@/services/authService';
 import { User, LoginCredentials, RegisterData, AuthContextType, UserRole } from '@/types/auth.types';
 
@@ -9,6 +10,7 @@ interface AuthProviderProps {
 }
 
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
+  const queryClient = useQueryClient();
   const [user, setUser] = useState<User | null>(null);
   const [token, setToken] = useState<string | null>(localStorage.getItem('accessToken'));
   const [isLoading, setIsLoading] = useState(true);
@@ -23,6 +25,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
           console.error('Failed to fetch current user:', error);
           localStorage.removeItem('accessToken');
           localStorage.removeItem('refreshToken');
+          queryClient.removeQueries({ queryKey: ['dashboard'] });
           setToken(null);
         }
       }
@@ -35,11 +38,12 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     const handleAuthLogout = () => {
       setUser(null);
       setToken(null);
+      queryClient.removeQueries({ queryKey: ['dashboard'] });
     };
 
     window.addEventListener('auth:logout', handleAuthLogout);
     return () => window.removeEventListener('auth:logout', handleAuthLogout);
-  }, [token]);
+  }, [queryClient, token]);
 
   const login = async (credentials: LoginCredentials) => {
     try {
@@ -73,6 +77,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     } finally {
       setUser(null);
       setToken(null);
+      queryClient.removeQueries({ queryKey: ['dashboard'] });
     }
   };
 

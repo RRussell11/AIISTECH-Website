@@ -7,6 +7,13 @@
 
 ## 📊 Quick Status
 
+### Dashboard Integration Progress (March 2026)
+
+- ✅ Phase 1 complete: route structure, login redirect, role normalization.
+- ✅ Phase 2 complete: `overview`, `automations`, `processes`, and `billing` wired to live dashboard APIs via React Query.
+- 🚧 Phase 3 started: section-level RBAC hardening and access-denied UX added.
+- 🚀 Phase 4 commenced: remaining routes (`compliance`, `settings`) moved from scaffolds to live sections.
+
 | Category | Status | Details |
 |----------|--------|---------|
 | **Frontend** | ✅ Complete | React + TypeScript, Auth UI, Protected Routes |

@@ -63,6 +63,33 @@ const users = {
   }
 };
 
+const dashboardSummaryByRole = {
+  EXECUTIVE: [
+    { id: 'cost-savings-ytd', label: 'Cost Savings YTD', value: '$1.2M', delta: '+12%', trend: 'up', severity: 'success' },
+    { id: 'revenue-psa', label: 'Revenue (PSA)', value: '$4.8M', delta: '+5%', trend: 'up', severity: 'success' },
+    { id: 'automation-rate', label: 'Automation Rate', value: '68%', delta: '+3%', trend: 'up', severity: 'success' },
+    { id: 'compliance-score', label: 'Compliance Score', value: '94', delta: '-1', trend: 'down', severity: 'warn' }
+  ],
+  FINANCE: [
+    { id: 'finance-revenue', label: 'Revenue', value: '$4.8M', delta: '+5%', trend: 'up', severity: 'success' },
+    { id: 'finance-savings', label: 'Cost Savings', value: '$1.2M', delta: '+12%', trend: 'up', severity: 'success' },
+    { id: 'finance-fte', label: 'FTE Hours Freed', value: '12400', delta: '+800', trend: 'up', severity: 'success' },
+    { id: 'finance-roi', label: 'ROI', value: '3.4x', delta: '+0.2', trend: 'up', severity: 'success' }
+  ],
+  OPERATIONS: [
+    { id: 'ops-volume', label: 'Process Volume', value: '34200', delta: '+8%', trend: 'up', severity: 'success' },
+    { id: 'ops-cycle', label: 'Cycle Time', value: '4.2m', delta: '-0.4m', trend: 'up', severity: 'success' },
+    { id: 'ops-success', label: 'Success Rate', value: '98.5%', delta: '+0.6%', trend: 'up', severity: 'success' },
+    { id: 'ops-uptime', label: 'Bot Uptime', value: '99.8%', delta: '+0.1%', trend: 'up', severity: 'success' }
+  ],
+  IT: [
+    { id: 'it-uptime', label: 'Bot Uptime', value: '99.8%', delta: '+0.1%', trend: 'up', severity: 'success' },
+    { id: 'it-errors', label: 'Error Rate', value: '1.2%', delta: '+0.4%', trend: 'down', severity: 'warn' },
+    { id: 'it-health', label: 'System Health', value: 'Optimal', delta: 'steady', trend: 'neutral', severity: 'success' },
+    { id: 'it-alerts', label: 'Active Alerts', value: '3', delta: '+1', trend: 'down', severity: 'warn' }
+  ]
+};
+
 // Helper function to generate tokens
 function generateTokens(user) {
   const userPayload = {
@@ -186,6 +213,90 @@ app.get('/api/health', (req, res) => {
   res.json({ status: 'ok', timestamp: new Date().toISOString() });
 });
 
+// GET /api/dashboard/:tenantId/summary
+app.get('/api/dashboard/:tenantId/summary', authenticateToken, (req, res) => {
+  const { tenantId } = req.params;
+  const role = req.user.role;
+
+  const metrics = dashboardSummaryByRole[role] || dashboardSummaryByRole.EXECUTIVE;
+
+  res.json({
+    tenantId,
+    role,
+    generatedAt: new Date().toISOString(),
+    metrics
+  });
+});
+
+// GET /api/dashboard/:tenantId/trends
+app.get('/api/dashboard/:tenantId/trends', authenticateToken, (req, res) => {
+  const { tenantId } = req.params;
+
+  res.json({
+    tenantId,
+    generatedAt: new Date().toISOString(),
+    points: [
+      { date: 'Jan', savings: 45000, automationRate: 45, errorRate: 2.1 },
+      { date: 'Feb', savings: 52000, automationRate: 48, errorRate: 1.8 },
+      { date: 'Mar', savings: 61000, automationRate: 52, errorRate: 1.5 }
+    ]
+  });
+});
+
+// GET /api/dashboard/:tenantId/bots
+app.get('/api/dashboard/:tenantId/bots', authenticateToken, (req, res) => {
+  const { tenantId } = req.params;
+
+  res.json({
+    tenantId,
+    generatedAt: new Date().toISOString(),
+    bots: [
+      { id: 'b1', name: 'Invoice_Bot_01', processName: 'AP Processing', status: 'Running', uptimePct: 99.9, errorCount7d: 0 },
+      { id: 'b2', name: 'Logistics_Sync', processName: 'Inventory Sync', status: 'Error', uptimePct: 85.4, errorCount7d: 14 }
+    ]
+  });
+});
+
+// GET /api/dashboard/:tenantId/processes
+app.get('/api/dashboard/:tenantId/processes', authenticateToken, (req, res) => {
+  const { tenantId } = req.params;
+
+  res.json({
+    tenantId,
+    generatedAt: new Date().toISOString(),
+    processes: [
+      { id: 'p1', name: 'AP Invoice Processing', volume30d: 12400, avgCycleTime: '4.2m', successRate: 98.5, savingsYtd: '$142k' },
+      { id: 'p2', name: 'Lead Qualification', volume30d: 8500, avgCycleTime: '1.8m', successRate: 92.1, savingsYtd: '$88k' }
+    ]
+  });
+});
+
+// GET /api/dashboard/:tenantId/alerts
+app.get('/api/dashboard/:tenantId/alerts', authenticateToken, (req, res) => {
+  const { tenantId } = req.params;
+
+  res.json({
+    tenantId,
+    generatedAt: new Date().toISOString(),
+    alerts: [
+      { id: 'a1', severity: 'HIGH', title: 'Bot Failure: Logistics_Sync', createdAt: new Date().toISOString() },
+      { id: 'a2', severity: 'MEDIUM', title: 'Cycle Time Increase on AP Processing', createdAt: new Date().toISOString() }
+    ]
+  });
+});
+
+// GET /api/dashboard/:tenantId/compliance
+app.get('/api/dashboard/:tenantId/compliance', authenticateToken, (req, res) => {
+  const { tenantId } = req.params;
+
+  res.json({
+    tenantId,
+    generatedAt: new Date().toISOString(),
+    score: 94,
+    certifications: ['SOC2', 'HIPAA']
+  });
+});
+
 // Start server
 app.listen(PORT, () => {
   console.log(`\n🚀 Mock Backend API Server running on http://localhost:${PORT}`);
@@ -194,6 +305,12 @@ app.listen(PORT, () => {
   console.log(`   POST   /api/auth/refresh`);
   console.log(`   GET    /api/auth/me`);
   console.log(`   POST   /api/auth/logout`);
+  console.log(`   GET    /api/dashboard/:tenantId/summary`);
+  console.log(`   GET    /api/dashboard/:tenantId/trends`);
+  console.log(`   GET    /api/dashboard/:tenantId/bots`);
+  console.log(`   GET    /api/dashboard/:tenantId/processes`);
+  console.log(`   GET    /api/dashboard/:tenantId/alerts`);
+  console.log(`   GET    /api/dashboard/:tenantId/compliance`);
   console.log(`   GET    /api/health`);
   console.log(`\n👥 Demo users:`);
   Object.values(users).forEach(user => {

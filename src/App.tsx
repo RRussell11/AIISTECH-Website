@@ -22,8 +22,9 @@ const App = () => (
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/login" element={<LoginForm />} />
+            <Route path="/dashboard" element={<Navigate to="/dashboard/overview" replace />} />
             <Route
-              path="/dashboard"
+              path="/dashboard/:section"
               element={
                 <ProtectedRoute>
                   <DashboardPage />

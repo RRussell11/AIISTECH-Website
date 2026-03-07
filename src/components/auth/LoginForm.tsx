@@ -1,7 +1,15 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from '@/contexts/AuthContext';
 import { BrainCircuit, AlertCircle } from 'lucide-react';
+
+type RedirectState = {
+  from?: {
+    pathname?: string;
+    search?: string;
+    hash?: string;
+  };
+};
 
 export const LoginForm: React.FC = () => {
   const [email, setEmail] = useState('');
@@ -11,6 +19,7 @@ export const LoginForm: React.FC = () => {
 
   const { login } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -19,7 +28,13 @@ export const LoginForm: React.FC = () => {
 
     try {
       await login({ email, password });
-      navigate('/dashboard');
+      const state = location.state as RedirectState | null;
+      const from = state?.from;
+      const redirectTo = from
+        ? `${from.pathname ?? '/dashboard/overview'}${from.search ?? ''}${from.hash ?? ''}`
+        : '/dashboard/overview';
+
+      navigate(redirectTo, { replace: true });
     } catch (err) {
       const error = err as { response?: { data?: { message?: string } } };
       setError(error.response?.data?.message || 'Invalid email or password');
