@@ -898,6 +898,264 @@ const BlogPage = () => {
   );
 };
 
+// --- Page: Services & Hosting ---
+
+const ServicesPage = ({ setPage }: { setPage: (p: Page) => void }) => {
+  const hostingPlans = [
+    {
+      name: 'Starter Hosting',
+      price: '$29',
+      period: '/mo',
+      description: 'Perfect for small organizations and non-profits getting started online.',
+      features: [
+        '10 GB SSD Storage',
+        '100 GB Bandwidth',
+        '1 Website',
+        'Free SSL Certificate',
+        '99.9% Uptime Guarantee',
+        'Email Support',
+      ],
+      highlight: false,
+    },
+    {
+      name: 'Professional Hosting',
+      price: '$79',
+      period: '/mo',
+      description: 'Ideal for growing organizations that need reliable, scalable hosting.',
+      features: [
+        '50 GB SSD Storage',
+        'Unlimited Bandwidth',
+        '10 Websites',
+        'Free SSL Certificate',
+        '99.99% Uptime Guarantee',
+        'Daily Backups',
+        'Priority Support (24/7)',
+        'CDN Included',
+      ],
+      highlight: true,
+    },
+    {
+      name: 'Enterprise Hosting',
+      price: '$199',
+      period: '/mo',
+      description: 'For large organizations requiring maximum performance and dedicated resources.',
+      features: [
+        '200 GB SSD Storage',
+        'Unlimited Bandwidth',
+        'Unlimited Websites',
+        'Free SSL Certificate',
+        '99.999% Uptime SLA',
+        'Hourly Backups',
+        'Dedicated Account Manager',
+        'DDoS Protection',
+        'Custom CDN Configuration',
+        'Server-Level Customization',
+      ],
+      highlight: false,
+    },
+  ];
+
+  return (
+    <div className="pt-24 bg-white">
+      {/* Hero */}
+      <section className="bg-aiistech-dark text-white py-24 px-4 overflow-hidden relative">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-aiistech-primary font-bold tracking-widest uppercase text-sm mb-4">Our Services</div>
+          <h1 className="text-5xl md:text-6xl font-bold leading-tight mb-6 max-w-3xl">
+            Reliable Hosting &amp; Managed Services
+          </h1>
+          <p className="text-xl text-white/60 max-w-2xl mb-10">
+            From secure web hosting to full-stack managed automation infrastructure — we keep your digital presence running fast, safe, and always available.
+          </p>
+          <div className="flex flex-wrap gap-4">
+            <button
+              onClick={() => setPage('pricing')}
+              className="bg-aiistech-primary text-aiistech-dark px-8 py-4 rounded-xl font-bold hover:opacity-90 transition-opacity"
+            >
+              View Pricing
+            </button>
+            <button className="border border-white/20 px-8 py-4 rounded-xl font-bold hover:border-white/40 transition-colors">
+              Talk to an Expert
+            </button>
+          </div>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-16">
+            {[
+              { value: '99.99%', label: 'Uptime SLA' },
+              { value: '24/7', label: 'Expert Support' },
+              { value: '<1s', label: 'Avg. Response Time' },
+              { value: '256-bit', label: 'SSL Encryption' },
+            ].map((stat, i) => (
+              <div key={i} className="bg-white/5 border border-white/10 rounded-2xl p-6 text-center">
+                <div className="text-3xl font-bold text-aiistech-primary mb-2">{stat.value}</div>
+                <div className="text-xs uppercase tracking-widest text-white/40">{stat.label}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Hosting Plans */}
+      <section className="py-24 px-4 bg-slate-50">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-16">
+            <div className="text-aiistech-primary font-bold uppercase tracking-widest text-sm mb-3">Hosting Services</div>
+            <h2 className="text-4xl font-bold text-slate-900 mb-4">Choose Your Hosting Plan</h2>
+            <p className="text-lg text-slate-500 max-w-2xl mx-auto">
+              All plans include free migration, automatic security patches, and our industry-leading support team.
+            </p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {hostingPlans.map((plan, i) => (
+              <div
+                key={i}
+                className={`rounded-3xl p-8 flex flex-col gap-6 transition-shadow ${
+                  plan.highlight
+                    ? 'bg-aiistech-dark text-white shadow-2xl shadow-aiistech-primary/20 ring-2 ring-aiistech-primary scale-105'
+                    : 'bg-white text-slate-900 shadow-lg hover:shadow-xl border border-slate-100'
+                }`}
+              >
+                {plan.highlight && (
+                  <div className="text-xs font-bold uppercase tracking-widest text-aiistech-primary">Most Popular</div>
+                )}
+                <div>
+                  <h3 className={`text-2xl font-bold mb-2 ${plan.highlight ? 'text-white' : 'text-slate-900'}`}>
+                    {plan.name}
+                  </h3>
+                  <p className={`text-sm ${plan.highlight ? 'text-white/60' : 'text-slate-500'}`}>{plan.description}</p>
+                </div>
+                <div className="flex items-end gap-1">
+                  <span className={`text-5xl font-bold ${plan.highlight ? 'text-aiistech-primary' : 'text-slate-900'}`}>
+                    {plan.price}
+                  </span>
+                  <span className={`mb-2 ${plan.highlight ? 'text-white/50' : 'text-slate-400'}`}>{plan.period}</span>
+                </div>
+                <ul className="space-y-3 flex-1">
+                  {plan.features.map((feature, j) => (
+                    <li key={j} className="flex items-center gap-3">
+                      <Check
+                        size={18}
+                        className="flex-shrink-0 text-aiistech-primary"
+                      />
+                      <span className={`text-sm ${plan.highlight ? 'text-white/80' : 'text-slate-600'}`}>{feature}</span>
+                    </li>
+                  ))}
+                </ul>
+                <button
+                  onClick={() => setPage('pricing')}
+                  className={`w-full py-4 rounded-xl font-bold transition-all ${
+                    plan.highlight
+                      ? 'bg-aiistech-primary text-aiistech-dark hover:opacity-90'
+                      : 'bg-slate-100 text-slate-900 hover:bg-slate-200'
+                  }`}
+                >
+                  Get Started
+                </button>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Core Services */}
+      <section className="py-24 px-4">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-16">
+            <div className="text-aiistech-primary font-bold uppercase tracking-widest text-sm mb-3">What We Offer</div>
+            <h2 className="text-4xl font-bold text-slate-900 mb-4">End-to-End AI &amp; Automation Services</h2>
+            <p className="text-lg text-slate-500 max-w-2xl mx-auto">
+              Beyond hosting, we deliver full-spectrum intelligent automation tailored for mid-market enterprises.
+            </p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {[
+              {
+                icon: (
+                  <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#38bdf8" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
+                    <polyline points="3.27 6.96 12 12.01 20.73 6.96"/>
+                    <line x1="12" y1="22.08" x2="12" y2="12"/>
+                  </svg>
+                ),
+                title: 'Automation Consulting',
+                desc: 'Strategic assessment and roadmap development for intelligent automation across your enterprise.',
+                items: ['Process Discovery & Analysis', 'ROI Calculation & Business Case', 'Implementation Roadmap'],
+              },
+              {
+                icon: (
+                  <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#38bdf8" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M12 4.5a2.5 2.5 0 0 0-4.96-.46 2.5 2.5 0 0 0-1.98 3 2.5 2.5 0 0 0-1.32 4.24 3 3 0 0 0 .34 5.58 2.5 2.5 0 0 0 2.96 3.08A2.5 2.5 0 0 0 12 19.5a2.5 2.5 0 0 0 4.96.44 2.5 2.5 0 0 0 2.96-3.08 3 3 0 0 0 .34-5.58 2.5 2.5 0 0 0-1.32-4.24 2.5 2.5 0 0 0-1.98-3A2.5 2.5 0 0 0 12 4.5"/>
+                    <path d="M9 11h6"/>
+                    <path d="M9 15h6"/>
+                  </svg>
+                ),
+                title: 'AI Agent Development',
+                desc: 'Custom agentic AI solutions that learn, adapt, and make intelligent decisions for your unique needs.',
+                items: ['Intelligent Decision Making', 'Self-Learning Algorithms', 'Continuous Optimization'],
+              },
+              {
+                icon: (
+                  <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#38bdf8" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <rect x="8" y="8" width="8" height="8" rx="2"/>
+                    <path d="M4 8V6a2 2 0 0 1 2-2h2"/>
+                    <path d="M4 16v2a2 2 0 0 0 2 2h2"/>
+                    <path d="M16 4h2a2 2 0 0 1 2 2v2"/>
+                    <path d="M16 20h2a2 2 0 0 0 2-2v-2"/>
+                  </svg>
+                ),
+                title: 'RPA Implementation',
+                desc: 'Deploy robotic process automation to handle repetitive tasks and free your team for strategic work.',
+                items: ['Bot Development & Deployment', 'System Integration', 'Performance Monitoring'],
+              },
+              {
+                icon: (
+                  <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#38bdf8" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                  </svg>
+                ),
+                title: 'Managed Services',
+                desc: 'Ongoing support, monitoring, and optimization of your automation infrastructure with 24/7 availability.',
+                items: ['24/7 Monitoring & Support', 'Proactive Maintenance', 'Regular Updates & Enhancements'],
+              },
+            ].map((service, i) => (
+              <div key={i} className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all border border-slate-100">
+                <div className="w-16 h-16 bg-aiistech-primary/10 rounded-xl flex items-center justify-center mb-6">
+                  {service.icon}
+                </div>
+                <h3 className="text-2xl font-bold text-slate-900 mb-3">{service.title}</h3>
+                <p className="text-slate-500 mb-6 leading-relaxed">{service.desc}</p>
+                <ul className="space-y-3">
+                  {service.items.map((item, j) => (
+                    <li key={j} className="flex items-center gap-3 text-slate-600">
+                      <Check size={18} className="text-aiistech-primary flex-shrink-0" />
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* CTA */}
+      <section className="py-20 px-4 bg-gradient-to-r from-aiistech-primary to-blue-500 text-white text-center">
+        <div className="max-w-3xl mx-auto">
+          <h2 className="text-4xl font-bold mb-4">Ready to Get Started?</h2>
+          <p className="text-xl text-white/80 mb-8">
+            Contact us today to discuss how our services and hosting solutions can power your organization.
+          </p>
+          <button
+            onClick={() => setPage('pricing')}
+            className="inline-block bg-white text-aiistech-primary hover:bg-slate-100 font-bold px-10 py-4 rounded-xl text-lg transition-all shadow-lg"
+          >
+            View Plans &amp; Pricing
+          </button>
+        </div>
+      </section>
+    </div>
+  );
+};
+
 // --- Page Router ---
 
 const App: React.FC = () => {
@@ -911,6 +1169,7 @@ const App: React.FC = () => {
     switch(activePage) {
       case 'home': return <HomePage setPage={setPage} />;
       case 'healthcare': return <HealthcarePage setPage={setPage} />;
+      case 'services': return <ServicesPage setPage={setPage} />;
       case 'pricing': return <PricingPage />;
       case 'case-studies': return <CaseStudiesPage />;
       case 'blog': return <BlogPage />;

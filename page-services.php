@@ -183,6 +183,148 @@ get_header();
         </div>
     </section>
 
+    <!-- Hosting Services Section -->
+    <section class="py-20 bg-slate-50">
+        <div class="max-w-7xl mx-auto px-4 md:px-10">
+            <div class="text-center mb-14">
+                <p class="text-aiistech-primary font-bold uppercase tracking-widest text-sm mb-3">
+                    <?php esc_html_e('Hosting Services', 'aiistech'); ?>
+                </p>
+                <h2 class="text-4xl font-bold text-aiistech-dark mb-4">
+                    <?php esc_html_e('Choose Your Hosting Plan', 'aiistech'); ?>
+                </h2>
+                <p class="text-lg text-gray-500 max-w-2xl mx-auto">
+                    <?php esc_html_e('All plans include free migration, automatic security patches, and our industry-leading support team.', 'aiistech'); ?>
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Starter Hosting -->
+                <div class="bg-white rounded-3xl p-8 shadow-lg border border-gray-100 flex flex-col gap-6">
+                    <div>
+                        <h3 class="text-2xl font-bold text-aiistech-dark mb-2">
+                            <?php esc_html_e('Starter Hosting', 'aiistech'); ?>
+                        </h3>
+                        <p class="text-sm text-gray-500">
+                            <?php esc_html_e('Perfect for small organizations and non-profits getting started online.', 'aiistech'); ?>
+                        </p>
+                    </div>
+                    <div class="flex items-end gap-1">
+                        <span class="text-5xl font-bold text-aiistech-dark">$29</span>
+                        <span class="mb-2 text-gray-400">/mo</span>
+                    </div>
+                    <ul class="space-y-3 flex-1">
+                        <?php
+                        $starter_features = array(
+                            __('10 GB SSD Storage', 'aiistech'),
+                            __('100 GB Bandwidth', 'aiistech'),
+                            __('1 Website', 'aiistech'),
+                            __('Free SSL Certificate', 'aiistech'),
+                            __('99.9% Uptime Guarantee', 'aiistech'),
+                            __('Email Support', 'aiistech'),
+                        );
+                        foreach ($starter_features as $feature) : ?>
+                        <li class="flex items-center gap-3 text-gray-600 text-sm">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="flex-shrink-0" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="20 6 9 17 4 12"/>
+                            </svg>
+                            <?php echo esc_html($feature); ?>
+                        </li>
+                        <?php endforeach; ?>
+                    </ul>
+                    <a href="<?php echo esc_url(home_url('/contact')); ?>" class="block text-center bg-gray-100 text-aiistech-dark hover:bg-gray-200 font-bold py-4 rounded-xl transition-colors">
+                        <?php esc_html_e('Get Started', 'aiistech'); ?>
+                    </a>
+                </div>
+
+                <!-- Professional Hosting (highlighted) -->
+                <div class="bg-aiistech-dark rounded-3xl p-8 shadow-2xl ring-2 ring-aiistech-primary flex flex-col gap-6 scale-105">
+                    <p class="text-xs font-bold uppercase tracking-widest text-aiistech-primary">
+                        <?php esc_html_e('Most Popular', 'aiistech'); ?>
+                    </p>
+                    <div>
+                        <h3 class="text-2xl font-bold text-white mb-2">
+                            <?php esc_html_e('Professional Hosting', 'aiistech'); ?>
+                        </h3>
+                        <p class="text-sm text-white/60">
+                            <?php esc_html_e('Ideal for growing organizations that need reliable, scalable hosting.', 'aiistech'); ?>
+                        </p>
+                    </div>
+                    <div class="flex items-end gap-1">
+                        <span class="text-5xl font-bold text-aiistech-primary">$79</span>
+                        <span class="mb-2 text-white/50">/mo</span>
+                    </div>
+                    <ul class="space-y-3 flex-1">
+                        <?php
+                        $pro_features = array(
+                            __('50 GB SSD Storage', 'aiistech'),
+                            __('Unlimited Bandwidth', 'aiistech'),
+                            __('10 Websites', 'aiistech'),
+                            __('Free SSL Certificate', 'aiistech'),
+                            __('99.99% Uptime Guarantee', 'aiistech'),
+                            __('Daily Backups', 'aiistech'),
+                            __('Priority Support (24/7)', 'aiistech'),
+                            __('CDN Included', 'aiistech'),
+                        );
+                        foreach ($pro_features as $feature) : ?>
+                        <li class="flex items-center gap-3 text-white/80 text-sm">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="flex-shrink-0" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="20 6 9 17 4 12"/>
+                            </svg>
+                            <?php echo esc_html($feature); ?>
+                        </li>
+                        <?php endforeach; ?>
+                    </ul>
+                    <a href="<?php echo esc_url(home_url('/contact')); ?>" class="block text-center bg-aiistech-primary text-aiistech-dark hover:opacity-90 font-bold py-4 rounded-xl transition-opacity">
+                        <?php esc_html_e('Get Started', 'aiistech'); ?>
+                    </a>
+                </div>
+
+                <!-- Enterprise Hosting -->
+                <div class="bg-white rounded-3xl p-8 shadow-lg border border-gray-100 flex flex-col gap-6">
+                    <div>
+                        <h3 class="text-2xl font-bold text-aiistech-dark mb-2">
+                            <?php esc_html_e('Enterprise Hosting', 'aiistech'); ?>
+                        </h3>
+                        <p class="text-sm text-gray-500">
+                            <?php esc_html_e('For large organizations requiring maximum performance and dedicated resources.', 'aiistech'); ?>
+                        </p>
+                    </div>
+                    <div class="flex items-end gap-1">
+                        <span class="text-5xl font-bold text-aiistech-dark">$199</span>
+                        <span class="mb-2 text-gray-400">/mo</span>
+                    </div>
+                    <ul class="space-y-3 flex-1">
+                        <?php
+                        $enterprise_features = array(
+                            __('200 GB SSD Storage', 'aiistech'),
+                            __('Unlimited Bandwidth', 'aiistech'),
+                            __('Unlimited Websites', 'aiistech'),
+                            __('Free SSL Certificate', 'aiistech'),
+                            __('99.999% Uptime SLA', 'aiistech'),
+                            __('Hourly Backups', 'aiistech'),
+                            __('Dedicated Account Manager', 'aiistech'),
+                            __('DDoS Protection', 'aiistech'),
+                            __('Custom CDN Configuration', 'aiistech'),
+                            __('Server-Level Customization', 'aiistech'),
+                        );
+                        foreach ($enterprise_features as $feature) : ?>
+                        <li class="flex items-center gap-3 text-gray-600 text-sm">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="flex-shrink-0" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="20 6 9 17 4 12"/>
+                            </svg>
+                            <?php echo esc_html($feature); ?>
+                        </li>
+                        <?php endforeach; ?>
+                    </ul>
+                    <a href="<?php echo esc_url(home_url('/contact')); ?>" class="block text-center bg-gray-100 text-aiistech-dark hover:bg-gray-200 font-bold py-4 rounded-xl transition-colors">
+                        <?php esc_html_e('Get Started', 'aiistech'); ?>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- CTA Section -->
     <section class="py-20 bg-gradient-to-r from-aiistech-primary to-blue-600 text-white">
         <div class="max-w-4xl mx-auto px-4 md:px-10 text-center">

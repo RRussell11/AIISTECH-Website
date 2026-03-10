@@ -8,6 +8,7 @@ import { LoginForm } from "@/components/auth/LoginForm";
 import { ProtectedRoute } from "@/components/auth/ProtectedRoute";
 import { DashboardPage } from "@/pages/DashboardPage";
 import Index from "./pages/Index";
+import HostingServicesPage from "./pages/HostingServicesPage";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -21,6 +22,7 @@ const App = () => (
         <AuthProvider>
           <Routes>
             <Route path="/" element={<Index />} />
+            <Route path="/hosting-services" element={<HostingServicesPage />} />
             <Route path="/login" element={<LoginForm />} />
             <Route path="/dashboard" element={<Navigate to="/dashboard/overview" replace />} />
             <Route
