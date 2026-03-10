@@ -5,6 +5,7 @@ export const Footer = () => {
     "https://citizengardens.org/wp-content/uploads/2025/11/Λproof-Whitepaper-1.pdf";
 
   const links = [
+    { label: "Hosting", href: "/hosting-services" },
     { label: "Paper", href: whitepaperUrl, external: true },
     { label: "AI Studio", href: "https://aistudio.google.com", external: true },
     { label: "Docs", href: "#developers" },
