@@ -81,3 +81,66 @@ export interface DashboardComplianceResponse {
   score: number;
   certifications: string[];
 }
+
+export type ProjectLifecycleStatus = 'undeployed' | 'provisioning' | 'deployed' | 'failed';
+
+export interface DashboardProject {
+  id: string;
+  slug: string;
+  name: string;
+  tenantId: string;
+  ownerId: string;
+  status: ProjectLifecycleStatus;
+  url: string | null;
+  deployedAt: string | null;
+  updatedAt: string;
+}
+
+export interface ProjectProvisioningRun {
+  runId: string;
+  operation: 'deploy' | 'teardown';
+  slug: string;
+  status: 'running' | 'rolling_back' | 'completed' | 'failed';
+  currentStep: string;
+  error: string | null;
+  failedStep?: string;
+  steps?: ProjectSagaStep[];
+  rollbackSteps?: ProjectSagaRollbackStep[];
+  startedAt: string;
+  finishedAt?: string;
+}
+
+export interface ProjectSagaStep {
+  name: string;
+  state: 'running' | 'completed' | 'rolling_back' | 'failed';
+  details?: string;
+  at: string;
+}
+
+export interface ProjectSagaRollbackStep {
+  name: string;
+  state: 'completed' | 'failed';
+  error?: string;
+  at: string;
+}
+
+export interface ProjectStatusResponse {
+  slug: string;
+  status: ProjectLifecycleStatus;
+  url: string | null;
+  deployedAt: string | null;
+  provisioning: {
+    runId: string | null;
+    operation: 'deploy' | 'teardown' | null;
+    currentStep: string | null;
+    error: string | null;
+    saga: ProjectProvisioningRun | null;
+  };
+}
+
+export interface ProjectDeployOperationResponse {
+  status: string;
+  runId: string;
+  operation: 'deploy' | 'teardown';
+  message?: string;
+}

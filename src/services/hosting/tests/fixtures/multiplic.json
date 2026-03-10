@@ -1,0 +1,10 @@
+{
+  "version": 1,
+  "sites": {
+    "test.example.com": {
+      "root": "tests/fixtures/sites/test.example.com",
+      "framework": "react",
+      "description": "Test fixture site"
+    }
+  }
+}

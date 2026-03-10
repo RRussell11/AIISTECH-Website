@@ -17,17 +17,12 @@ export const authService = {
     return data;
   },
 
-  async refreshToken(refreshToken: string): Promise<{ accessToken: string }> {
-    const { data } = await api.post('/auth/refresh', { refreshToken });
-    return data;
+  async refreshToken(): Promise<void> {
+    // Refresh token is sent automatically as an httpOnly cookie
+    await api.post('/auth/refresh');
   },
 
   async logout(): Promise<void> {
-    try {
-      await api.post('/auth/logout');
-    } finally {
-      localStorage.removeItem('accessToken');
-      localStorage.removeItem('refreshToken');
-    }
+    await api.post('/auth/logout');
   },
 };

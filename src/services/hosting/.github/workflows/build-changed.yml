@@ -1,0 +1,84 @@
+name: Build Changed Sites
+on:
+  push:
+    branches: [main]
+    paths: ['sites/**', 'shared/**', 'multiplic.json']
+
+jobs:
+  detect:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    outputs:
+      sites: ${{ steps.detect.outputs.sites }}
+      has_changes: ${{ steps.detect.outputs.has_changes }}
+    steps:
+      - uses: actions/checkout@v4
+        with: { fetch-depth: 2 }
+      - name: Detect changed sites
+        id: detect
+        run: |
+          CHANGED=$(git diff --name-only HEAD~1 HEAD \
+            | grep '^sites/' \
+            | cut -d'/' -f2 \
+            | sort -u)
+          # Also rebuild all sites if shared/ changed
+          if git diff --name-only HEAD~1 HEAD | grep -q '^shared/'; then
+            CHANGED=$(ls sites/)
+          fi
+          SITES=$(echo "$CHANGED" | tr '\n' ' ' | xargs)
+          echo "sites=$SITES" >> $GITHUB_OUTPUT
+          echo "has_changes=$([ -n "$SITES" ] && echo true || echo false)" >> $GITHUB_OUTPUT
+
+  build:
+    needs: detect
+    if: needs.detect.outputs.has_changes == 'true'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version-file: '.nvmrc', cache: 'npm' }
+      - name: Install root workspace deps
+        run: npm ci
+      - name: Build changed sites
+        run: |
+          for site in ${{ needs.detect.outputs.sites }}; do
+            echo "=== Building $site ==="
+            cd sites/$site
+            npm ci
+            npm run build
+            cd ../..
+          done
+      - name: Commit dist to built branch
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          git config user.email "ci@multiplic"
+          git config user.name "Multiplic CI"
+          git fetch origin built 2>/dev/null || true
+          git checkout -B built origin/built 2>/dev/null || git checkout --orphan built
+          git checkout main -- .
+          for site in ${{ needs.detect.outputs.sites }}; do
+            git add -f sites/$site/dist/
+          done
+          git commit -m "build(${{ github.sha }}): ${{ needs.detect.outputs.sites }}"
+          git push origin built --force-with-lease
+
+  notify:
+    needs: build
+    runs-on: ubuntu-latest
+    permissions: {}
+    steps:
+      - name: Ping server sync endpoint
+        run: |
+          PAYLOAD=$(printf '{"sha":"%s","sites":"%s"}' \
+            "${{ github.sha }}" \
+            "${{ needs.detect.outputs.sites }}")
+          SIG=$(printf '%s' "$PAYLOAD" | \
+            openssl dgst -sha256 -hmac "${{ secrets.SYNC_SECRET }}" | awk '{print $2}')
+          curl -fsSL -X POST "${{ secrets.SERVER_SYNC_URL }}/sync" \
+            -H "X-Hub-Signature-256: sha256=$SIG" \
+            -H "Content-Type: application/json" \
+            -d "$PAYLOAD"

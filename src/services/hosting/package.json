@@ -1,0 +1,29 @@
+{
+  "name": "multiplic",
+  "version": "0.1.0",
+  "private": true,
+  "workspaces": ["server", "cli", "sites/*", "shared"],
+  "scripts": {
+    "test":         "jest --runInBand",
+    "test:unit":    "jest tests/unit",
+    "test:int":     "jest tests/integration",
+    "test:watch":   "jest --watch",
+    "lint":         "eslint server/ cli/ --ext .js",
+    "start":        "node server/app.js",
+    "start:sync":   "node server/sync.js",
+    "dev":          "nodemon server/app.js"
+  },
+  "devDependencies": {
+    "jest":         "^29.0.0",
+    "supertest":    "^6.0.0",
+    "nodemon":      "^3.0.0",
+    "eslint":       "^8.0.0"
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "collectCoverageFrom": ["server/**/*.js", "cli/**/*.js"],
+    "coverageThreshold": {
+      "global": { "branches": 80, "functions": 80, "lines": 80 }
+    }
+  }
+}

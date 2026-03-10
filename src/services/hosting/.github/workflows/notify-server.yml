@@ -1,0 +1,19 @@
+name: Notify Server
+on:
+  push:
+    branches: [built]
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    permissions: {}
+    steps:
+      - name: Ping server sync endpoint
+        run: |
+          PAYLOAD=$(printf '{"sha":"%s"}' "${{ github.sha }}")
+          SIG=$(printf '%s' "$PAYLOAD" | \
+            openssl dgst -sha256 -hmac "${{ secrets.SYNC_SECRET }}" | awk '{print $2}')
+          curl -fsSL -X POST "${{ secrets.SERVER_SYNC_URL }}/sync" \
+            -H "X-Hub-Signature-256: sha256=$SIG" \
+            -H "Content-Type: application/json" \
+            -d "$PAYLOAD"

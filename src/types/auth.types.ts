@@ -16,6 +16,7 @@ export interface User {
   isActive: boolean;
   createdAt: string;
   updatedAt: string;
+  projects?: string[];  // slugs of deployed projects this user may access
 }
 
 export interface LoginCredentials {
@@ -36,13 +37,13 @@ export interface AuthTokens {
   refreshToken: string;
 }
 
-export interface LoginResponse extends AuthTokens {
+// Tokens are now httpOnly cookies — LoginResponse only returns the user object
+export interface LoginResponse {
   user: User;
 }
 
 export interface AuthContextType {
   user: User | null;
-  token: string | null;
   login: (credentials: LoginCredentials) => Promise<void>;
   register: (data: RegisterData) => Promise<void>;
   logout: () => void;

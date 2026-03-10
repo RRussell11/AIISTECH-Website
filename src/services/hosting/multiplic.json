@@ -1,0 +1,25 @@
+{
+  "version": 1,
+  "sites": {
+    "citizengardens.org": {
+      "root": "sites/citizengardens.org",
+      "framework": "react",
+      "description": "Citizen Gardens main site"
+    },
+    "citizengardens.org/lambdaproof": {
+      "root": "sites/citizengardens.org--lambdaproof",
+      "framework": "react",
+      "description": "Lambda Proof application"
+    },
+    "app.aiistech.com": {
+      "root": "sites/app.aiistech.com",
+      "framework": "react",
+      "description": "AIISTECH React SPA — authenticated application layer"
+    },
+    "dashboard.aiistech.com": {
+      "root": "sites/dashboard.aiistech.com",
+      "framework": "react",
+      "description": "AIISTECH role-based analytics dashboard"
+    }
+  }
+}
