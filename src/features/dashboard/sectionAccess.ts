@@ -2,6 +2,7 @@ import { UserRole } from '@/types/auth.types';
 
 export const DASHBOARD_SECTIONS = [
   'overview',
+  'projects',
   'automations',
   'processes',
   'billing',
@@ -21,6 +22,7 @@ export const SECTION_ROLE_ACCESS: Partial<Record<DashboardSection, UserRole[]>> 
 
 const SECTION_LABELS: Record<DashboardSection, string> = {
   overview: 'Overview',
+  projects: 'Projects',
   automations: 'Automations',
   processes: 'Processes',
   billing: 'Billing',

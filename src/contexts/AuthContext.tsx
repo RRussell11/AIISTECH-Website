@@ -12,22 +12,17 @@ interface AuthProviderProps {
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const queryClient = useQueryClient();
   const [user, setUser] = useState<User | null>(null);
-  const [token, setToken] = useState<string | null>(localStorage.getItem('accessToken'));
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const initAuth = async () => {
-      if (token) {
-        try {
-          const currentUser = await authService.getCurrentUser();
-          setUser(currentUser);
-        } catch (error) {
-          console.error('Failed to fetch current user:', error);
-          localStorage.removeItem('accessToken');
-          localStorage.removeItem('refreshToken');
-          queryClient.removeQueries({ queryKey: ['dashboard'] });
-          setToken(null);
-        }
+      try {
+        // Rely entirely on the httpOnly cookie — no localStorage read needed
+        const currentUser = await authService.getCurrentUser();
+        setUser(currentUser);
+      } catch {
+        // 401 = no valid cookie; user stays null (not logged in)
+        setUser(null);
       }
       setIsLoading(false);
     };
@@ -37,21 +32,17 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     // Listen for logout events from API service
     const handleAuthLogout = () => {
       setUser(null);
-      setToken(null);
       queryClient.removeQueries({ queryKey: ['dashboard'] });
     };
 
     window.addEventListener('auth:logout', handleAuthLogout);
     return () => window.removeEventListener('auth:logout', handleAuthLogout);
-  }, [queryClient, token]);
+  }, [queryClient]);
 
   const login = async (credentials: LoginCredentials) => {
     try {
       const response = await authService.login(credentials);
-      setToken(response.accessToken);
       setUser(response.user);
-      localStorage.setItem('accessToken', response.accessToken);
-      localStorage.setItem('refreshToken', response.refreshToken);
     } catch (error) {
       console.error('Login failed:', error);
       throw error;
@@ -61,10 +52,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const register = async (data: RegisterData) => {
     try {
       const response = await authService.register(data);
-      setToken(response.accessToken);
       setUser(response.user);
-      localStorage.setItem('accessToken', response.accessToken);
-      localStorage.setItem('refreshToken', response.refreshToken);
     } catch (error) {
       console.error('Registration failed:', error);
       throw error;
@@ -76,7 +64,6 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       await authService.logout();
     } finally {
       setUser(null);
-      setToken(null);
       queryClient.removeQueries({ queryKey: ['dashboard'] });
     }
   };
@@ -87,7 +74,6 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
   const value: AuthContextType = {
     user,
-    token,
     login,
     register,
     logout,

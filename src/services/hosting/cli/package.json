@@ -1,0 +1,12 @@
+{
+  "name": "multiplic-cli",
+  "version": "0.1.0",
+  "description": "Multiplic CLI — manage your multi-site Node.js server",
+  "bin": {
+    "mpc": "bin/mpc.js"
+  },
+  "main": "bin/mpc.js",
+  "dependencies": {
+    "commander": "^11.0.0"
+  }
+}

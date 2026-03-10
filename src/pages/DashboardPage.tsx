@@ -18,6 +18,7 @@ import {
 } from '@/features/dashboard/hooks/useDashboardQueries';
 import { DashboardMetric } from '@/features/dashboard/types';
 import { OverviewSection } from '@/features/dashboard/sections/OverviewSection';
+import { ProjectDeploymentSection } from '@/features/dashboard/sections/ProjectDeploymentSection';
 import { AutomationsSection } from '@/features/dashboard/sections/AutomationsSection';
 import { ProcessesSection } from '@/features/dashboard/sections/ProcessesSection';
 import { BillingSection } from '@/features/dashboard/sections/BillingSection';
@@ -28,10 +29,6 @@ import { SettingsSection } from '@/features/dashboard/sections/SettingsSection';
 export const DashboardPage: React.FC = () => {
   const { user, logout, hasRole } = useAuth();
   const { section } = useParams<{ section: string }>();
-
-  if (!isDashboardSection(section)) {
-    return <Navigate to="/dashboard/overview" replace />;
-  }
 
   const normalizedRole = normalizeUserRoleForDashboard(user?.role);
 
@@ -71,17 +68,19 @@ export const DashboardPage: React.FC = () => {
   };
 
   const config = getRoleDashboardConfig();
-  const activeSectionLabel = getDashboardSectionLabel(section);
+  const currentSection = isDashboardSection(section) ? section : 'overview';
+  const activeSectionLabel = getDashboardSectionLabel(currentSection);
 
   const visibleSections = DASHBOARD_SECTIONS.filter((item) => canAccessDashboardSection(item, hasRole));
-  const isSectionAllowed = canAccessDashboardSection(section, hasRole);
+  const isSectionAllowed = canAccessDashboardSection(currentSection, hasRole);
 
-  const isOverviewSection = section === 'overview';
-  const isAutomationsSection = section === 'automations';
-  const isProcessesSection = section === 'processes';
-  const isBillingSection = section === 'billing';
-  const isComplianceSection = section === 'compliance';
-  const isSettingsSection = section === 'settings';
+  const isOverviewSection = currentSection === 'overview';
+  const isProjectsSection = currentSection === 'projects';
+  const isAutomationsSection = currentSection === 'automations';
+  const isProcessesSection = currentSection === 'processes';
+  const isBillingSection = currentSection === 'billing';
+  const isComplianceSection = currentSection === 'compliance';
+  const isSettingsSection = currentSection === 'settings';
 
   const {
     data: summary,
@@ -123,7 +122,6 @@ export const DashboardPage: React.FC = () => {
     id: `fallback-${index}`,
     label,
     value: '--',
-    delta: '',
     trend: 'neutral',
     severity: 'neutral',
   }));
@@ -161,7 +159,7 @@ export const DashboardPage: React.FC = () => {
       <main className="max-w-7xl mx-auto px-4 py-8">
         <div className="mb-6 flex flex-wrap gap-2">
           {visibleSections.map((item) => {
-            const isActive = item === section;
+            const isActive = item === currentSection;
             return (
               <Link
                 key={item}
@@ -187,6 +185,8 @@ export const DashboardPage: React.FC = () => {
             isTrendsLoading={isTrendsLoading}
             isTrendsError={isTrendsError}
           />
+        ) : isProjectsSection ? (
+          <ProjectDeploymentSection userId={user?.id} />
         ) : isAutomationsSection ? (
           <AutomationsSection
             bots={bots}

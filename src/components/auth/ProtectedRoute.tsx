@@ -9,7 +9,7 @@ interface ProtectedRouteProps {
 }
 
 export const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children, roles }) => {
-  const { isAuthenticated, isLoading, hasRole } = useAuth();
+  const { isAuthenticated, isLoading, hasRole, user } = useAuth();
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -26,6 +26,36 @@ export const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children, roles 
 
   if (!isAuthenticated) {
     return <Navigate to="/login" state={{ from: location }} replace />;
+  }
+
+  // Phase 2 — per-project subdomain access check
+  // If we're on a project subdomain (*.aiistech.com, not app. or dashboard.),
+  // the user's projects[] claim must include this slug.
+  const hostname = window.location.hostname;
+  const projectSlug = hostname.split('.')[0];
+  const isProjectSubdomain =
+    hostname.endsWith('.aiistech.com') &&
+    projectSlug !== 'app' &&
+    projectSlug !== 'dashboard' &&
+    projectSlug !== 'api';
+
+  if (isProjectSubdomain && !(user?.projects ?? []).includes(projectSlug)) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-aiistech-dark px-4">
+        <div className="max-w-md text-center">
+          <h1 className="text-4xl font-bold text-white mb-4">Access Denied</h1>
+          <p className="text-slate-400 mb-6">
+            You don't have access to this project workspace.
+          </p>
+          <a
+            href="https://app.aiistech.com/dashboard"
+            className="inline-block px-6 py-3 bg-aiistech-primary text-aiistech-dark font-bold rounded-lg hover:opacity-90 transition"
+          >
+            Back to Dashboard
+          </a>
+        </div>
+      </div>
+    );
   }
 
   if (roles && !hasRole(roles)) {

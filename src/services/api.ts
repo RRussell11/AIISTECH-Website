@@ -11,21 +11,16 @@ class ApiService {
       headers: {
         'Content-Type': 'application/json',
       },
+      withCredentials: true,  // send httpOnly cookies on every request
     });
 
     this.setupInterceptors();
   }
 
   private setupInterceptors() {
-    // Request interceptor - Add auth token
+    // Request interceptor — no manual token injection; cookies are sent automatically
     this.api.interceptors.request.use(
-      (config: InternalAxiosRequestConfig) => {
-        const token = localStorage.getItem('accessToken');
-        if (token && config.headers) {
-          config.headers.Authorization = `Bearer ${token}`;
-        }
-        return config;
-      },
+      (config: InternalAxiosRequestConfig) => config,
       (error: AxiosError) => Promise.reject(error)
     );
 
@@ -39,27 +34,11 @@ class ApiService {
           originalRequest._retry = true;
 
           try {
-            const refreshToken = localStorage.getItem('refreshToken');
-            if (!refreshToken) {
-              throw new Error('No refresh token available');
-            }
-
-            const { data } = await axios.post(`${API_BASE_URL}/auth/refresh`, {
-              refreshToken,
-            });
-
-            localStorage.setItem('accessToken', data.accessToken);
-            
-            if (originalRequest.headers) {
-              originalRequest.headers.Authorization = `Bearer ${data.accessToken}`;
-            }
-
+            // Cookie-based refresh — the refresh_token cookie is sent automatically
+            await axios.post(`${API_BASE_URL}/auth/refresh`, {}, { withCredentials: true });
             return this.api(originalRequest);
           } catch (refreshError) {
-            // Refresh failed - clear storage and emit logout event
-            localStorage.removeItem('accessToken');
-            localStorage.removeItem('refreshToken');
-            // Dispatch a custom event that AuthContext can listen to
+            // Refresh failed — emit logout event so AuthContext clears user state
             window.dispatchEvent(new CustomEvent('auth:logout'));
             return Promise.reject(refreshError);
           }
