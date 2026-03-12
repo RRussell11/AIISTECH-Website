@@ -1,21 +1,24 @@
-import { AlertCircle, Eye, TrendingDown } from "lucide-react";
+import { AlertTriangle, TrendingDown, Layers } from "lucide-react";
 
 export const Problem = () => {
   const problems = [
     {
-      icon: Eye,
-      title: "Surveillance defaults",
-      description: "Data collected 'just in case,' monetized without consent, deanonymized at will.",
+      icon: Layers,
+      title: "Fragmented tools",
+      description:
+        "Your team juggles 8+ disconnected tools — project management, time tracking, billing, legacy RPA bots, and analytics — each creating data silos and manual reconciliation.",
     },
     {
       icon: TrendingDown,
-      title: "Unbounded drift",
-      description: "Algorithms update silently, models retrain without provenance, behavior changes invisibly.",
+      title: "Revenue leakage",
+      description:
+        "Manual processes consume 30–40% of back-office team time. Missed billable hours, invoice errors, and unbilled work silently drain 15–20% of potential revenue.",
     },
     {
-      icon: AlertCircle,
-      title: "Opaque governance",
-      description: "Terms of service as law, decisions made behind closed doors, no verifiable enforcement.",
+      icon: AlertTriangle,
+      title: "RPA failures",
+      description:
+        "30–50% of RPA initiatives fail due to brittle bots, inability to handle exceptions, and unstructured data. Without intelligent orchestration, automation ROI remains elusive.",
     },
   ];
 
@@ -24,11 +27,11 @@ export const Problem = () => {
       <div className="max-w-[1280px] mx-auto px-6 lg:px-20">
         <div className="text-center mb-16">
           <h2 className="text-3xl lg:text-4xl font-bold mb-4">
-            Why trust-based systems are failing
+            The problem: fragmented tools + manual processes
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Our digital infrastructure runs on surveillance, opacity, and soft guarantees.
-            Users must trust platforms to behave correctly—but trust is not verifiable.
+            Mid-market enterprises are stuck between legacy workflows and failed automation
+            initiatives — unable to realize the ROI that modern AI-native platforms deliver.
           </p>
         </div>
 
@@ -43,6 +46,22 @@ export const Problem = () => {
               </div>
               <h3 className="text-xl font-semibold mb-2">{problem.title}</h3>
               <p className="text-muted-foreground">{problem.description}</p>
+            </div>
+          ))}
+        </div>
+
+        {/* Stats Bar */}
+        <div className="mt-16 grid md:grid-cols-3 gap-6 p-8 rounded-2xl border border-border bg-card/30">
+          {[
+            { stat: "8+", label: "Disconnected tools the average mid-market firm manages" },
+            { stat: "30–40%", label: "Of back-office time consumed by manual processes" },
+            { stat: "50%", label: "Of RPA projects fail without intelligent orchestration" },
+          ].map((item, i) => (
+            <div key={i} className="text-center">
+              <div className="text-3xl lg:text-4xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent mb-2">
+                {item.stat}
+              </div>
+              <div className="text-sm text-muted-foreground">{item.label}</div>
             </div>
           ))}
         </div>

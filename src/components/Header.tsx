@@ -14,16 +14,12 @@ export const Header = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const whitepaperUrl =
-    "https://citizengardens.org/wp-content/uploads/2025/11/Λproof-Whitepaper-1.pdf";
-
   const navLinks = [
-    { label: "Overview", href: "#hero" },
-    { label: "How it Works", href: "#how-it-works" },
-    { label: "Protocols", href: "#protocols" },
-    { label: "Developers", href: "#developers" },
-    { label: "AI Studio", href: "https://aistudio.google.com", external: true },
-    { label: "Paper", href: whitepaperUrl, external: true },
+    { label: "Platform", href: "#platform" },
+    { label: "Solutions", href: "#solutions" },
+    { label: "Services", href: "#how-it-works" },
+    { label: "Resources", href: "#roi-calculator" },
+    { label: "Pricing", href: "#pricing" },
   ];
 
   return (
@@ -37,9 +33,9 @@ export const Header = () => {
           {/* Logo */}
           <a href="#hero" className="flex items-center gap-2">
             <span className="text-2xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
-              Λ
+              AIIS
             </span>
-            <span className="text-xl font-semibold text-foreground">Proof</span>
+            <span className="text-xl font-semibold text-foreground">TECH</span>
           </a>
 
           {/* Desktop Navigation */}
@@ -49,7 +45,6 @@ export const Header = () => {
                 key={link.href}
                 href={link.href}
                 className="text-sm text-muted-foreground hover:text-primary transition-colors"
-                {...(link.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
               >
                 {link.label}
               </a>
@@ -59,12 +54,10 @@ export const Header = () => {
           {/* Desktop CTAs */}
           <div className="hidden md:flex items-center gap-3">
             <Button variant="outline" size="sm" asChild>
-              <a href={whitepaperUrl} target="_blank" rel="noopener noreferrer">
-                Read the Paper
-              </a>
+              <a href="/login">Sign In</a>
             </Button>
             <Button size="sm" className="bg-primary text-primary-foreground hover:bg-primary/90" asChild>
-              <a href="#contact">Contact</a>
+              <a href="#assessment">Start Assessment</a>
             </Button>
           </div>
 
@@ -87,7 +80,6 @@ export const Header = () => {
                 key={link.href}
                 href={link.href}
                 className="text-base text-muted-foreground hover:text-primary transition-colors"
-                {...(link.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 {link.label}
@@ -95,12 +87,10 @@ export const Header = () => {
             ))}
             <div className="flex flex-col gap-3 mt-4">
               <Button variant="outline" size="sm" asChild>
-                <a href={whitepaperUrl} target="_blank" rel="noopener noreferrer">
-                  Read the Paper
-                </a>
+                <a href="/login">Sign In</a>
               </Button>
               <Button size="sm" className="bg-primary text-primary-foreground" asChild>
-                <a href="#contact">Contact</a>
+                <a href="#assessment">Start Assessment</a>
               </Button>
             </div>
           </nav>

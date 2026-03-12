@@ -26,11 +26,11 @@ const Index = () => {
         <Problem />
         <WhatIsLambdaProof />
         <HowItWorks />
-        <Guarantees />
         <Protocols />
-        <Constitution />
+        <Guarantees />
         <Developers />
         <WhoFor />
+        <Constitution />
         <CTA />
       </main>
       <Footer />
