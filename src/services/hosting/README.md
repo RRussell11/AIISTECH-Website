@@ -1,8 +1,8 @@
-# Multiplic
+# Multi-Domain Hosting
 
 **One repo. One Node.js process. Unlimited sites.**
 
-Multiplic is a monorepo-driven multi-site hosting platform. A single Express server reads a central `multiplic.json` registry and serves any number of React/Angular SPAs from one process. GitHub is the source of truth — every `git push` triggers a CI build that publishes built assets to the `built` branch, and the server hot-reloads via a signed webhook.
+A monorepo-driven multi-site hosting platform. A single Express server reads a central `multiplic.json` registry and serves any number of React/Angular SPAs from one process. GitHub is the source of truth — every `git push` triggers a CI build that publishes built assets to the `built` branch, and the server hot-reloads via a signed webhook.
 
 ---
 
