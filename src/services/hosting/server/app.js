@@ -7,6 +7,12 @@ const logger   = require('./logger');
 const app = express();
 app.use(express.json());
 
+// Multiplic Studio — opt-in developer environment (only loaded when STUDIO_PASSWORD is set)
+if (process.env.STUDIO_PASSWORD) {
+  const studio = require('./studio');
+  app.use('/_studio', studio);
+}
+
 const config = loadConfig();
 
 app.use((req, res, next) => {
