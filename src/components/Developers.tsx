@@ -1,114 +1,198 @@
-import { Code2, Server, Cpu, Database, Shield } from "lucide-react";
+import { useState } from "react";
+import { Button } from "@/components/ui/button";
+import { ArrowRight, Calculator } from "lucide-react";
+
+const INDUSTRY_MULTIPLIERS: Record<string, number> = {
+  healthcare: 1.5,
+  manufacturing: 1.3,
+  bfsi: 1.6,
+  professional: 1.2,
+};
+
+const SIZE_MULTIPLIERS: Record<string, { label: string; multiplier: number; base: number }> = {
+  small: { label: "100–499 employees", multiplier: 0.8, base: 50000 },
+  mid: { label: "500–1,999 employees", multiplier: 1.0, base: 100000 },
+  large: { label: "2,000–4,999 employees", multiplier: 1.5, base: 200000 },
+  enterprise: { label: "5,000+ employees", multiplier: 2.5, base: 400000 },
+};
 
 export const Developers = () => {
-  const techStack = [
-    { icon: Code2, label: "Circuits", detail: "Circom & Groth16 for zk proofs" },
-    { icon: Server, label: "Contracts", detail: "MTPI root contracts on-chain" },
-    { icon: Cpu, label: "Proof Manager", detail: "Client-side verification layer" },
-    { icon: Database, label: "Archivum", detail: "Prime-indexed audit storage" },
-    { icon: Shield, label: "DIN-RPC", detail: "Decentralized identity network" },
-  ];
+  const [industry, setIndustry] = useState("healthcare");
+  const [size, setSize] = useState("mid");
+  const [processes, setProcesses] = useState(10);
+  const [calculated, setCalculated] = useState(false);
 
-  const codeSnippet = `// Verify a proof before state transition
-import { ProofManager } from '@lambda-proof/core';
-
-const proof = await ProofManager.generate({
-  identity: userΞ₀,
-  action: 'updateRecord',
-  constraints: ethicalInvariants,
-  witness: privateData
-});
-
-// Proof validated client-side
-if (proof.isValid) {
-  const receipt = await Archivum.commit(proof);
-  console.log('Receipt:', receipt.primeIndex);
-}`;
+  const sizeConfig = SIZE_MULTIPLIERS[size];
+  const industryMult = INDUSTRY_MULTIPLIERS[industry];
+  const processValue = Math.round((sizeConfig.base * industryMult * (processes / 10)) / 1000) * 1000;
+  const annualSavings = Math.round(processValue * 1.4 / 1000) * 1000;
+  const roi = Math.round((annualSavings / processValue) * 100);
+  const paybackMonths = Math.ceil((processValue / annualSavings) * 12);
 
   return (
-    <section id="developers" className="py-20 lg:py-32 bg-card/50">
+    <section id="roi-calculator" className="py-20 lg:py-32 bg-card/50">
       <div className="max-w-[1280px] mx-auto px-6 lg:px-20">
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16">
-          {/* Left: Tech Stack */}
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+          {/* Left: Calculator */}
           <div>
-            <h2 className="text-3xl lg:text-4xl font-bold mb-6">Under the hood</h2>
-            <p className="text-lg text-muted-foreground mb-8">
-              ΛProof combines cutting-edge cryptography with practical developer tooling. Build
-              proof-first systems without reinventing the stack.
+            <div className="inline-flex items-center gap-2 mb-4">
+              <Calculator className="w-5 h-5 text-primary" />
+              <span className="text-xs font-bold text-primary tracking-wider uppercase">ROI Calculator</span>
+            </div>
+            <h2 className="text-3xl lg:text-4xl font-bold mb-4">
+              Estimate your automation ROI
+            </h2>
+            <p className="text-muted-foreground mb-8">
+              Answer three questions to get a ballpark ROI estimate for your organization. Our
+              readiness assessment will sharpen these numbers with your actual process data.
             </p>
 
-            <div className="space-y-3">
-              {techStack.map((item, index) => (
-                <div
-                  key={index}
-                  className="group flex items-center gap-4 p-4 rounded-lg border border-border bg-card hover:border-primary/50 transition-all duration-300 hover:translate-x-2"
-                >
-                  <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0 group-hover:bg-primary/20 transition-colors">
-                    <item.icon className="w-5 h-5 text-primary" />
-                  </div>
-                  <div>
-                    <div className="font-semibold text-sm">{item.label}</div>
-                    <div className="text-xs text-muted-foreground">{item.detail}</div>
-                  </div>
+            <div className="space-y-6">
+              {/* Industry */}
+              <div>
+                <label className="text-sm font-semibold text-foreground mb-2 block">
+                  Industry vertical
+                </label>
+                <div className="grid grid-cols-2 gap-2">
+                  {[
+                    { value: "healthcare", label: "Healthcare" },
+                    { value: "manufacturing", label: "Manufacturing" },
+                    { value: "bfsi", label: "BFSI" },
+                    { value: "professional", label: "Prof. Services" },
+                  ].map((opt) => (
+                    <button
+                      key={opt.value}
+                      onClick={() => { setIndustry(opt.value); setCalculated(false); }}
+                      className={`p-3 rounded-lg border text-sm font-medium transition-all ${
+                        industry === opt.value
+                          ? "border-primary bg-primary/10 text-primary"
+                          : "border-border bg-card text-muted-foreground hover:border-primary/50"
+                      }`}
+                    >
+                      {opt.label}
+                    </button>
+                  ))}
                 </div>
-              ))}
-            </div>
+              </div>
 
-            <div className="mt-8 p-4 rounded-lg border border-primary/30 bg-primary/5">
-              <p className="text-sm text-foreground">
-                <strong>Open source:</strong> Core libraries, circuits, and contracts available on
-                GitHub.
-              </p>
+              {/* Company Size */}
+              <div>
+                <label className="text-sm font-semibold text-foreground mb-2 block">
+                  Company size
+                </label>
+                <div className="grid grid-cols-2 gap-2">
+                  {Object.entries(SIZE_MULTIPLIERS).map(([key, config]) => (
+                    <button
+                      key={key}
+                      onClick={() => { setSize(key); setCalculated(false); }}
+                      className={`p-3 rounded-lg border text-sm font-medium transition-all ${
+                        size === key
+                          ? "border-primary bg-primary/10 text-primary"
+                          : "border-border bg-card text-muted-foreground hover:border-primary/50"
+                      }`}
+                    >
+                      {config.label}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              {/* Processes */}
+              <div>
+                <label className="text-sm font-semibold text-foreground mb-2 block">
+                  Automatable processes identified: <span className="text-primary">{processes}</span>
+                </label>
+                <input
+                  type="range"
+                  min={3}
+                  max={50}
+                  value={processes}
+                  onChange={(e) => { setProcesses(Number(e.target.value)); setCalculated(false); }}
+                  className="w-full accent-primary"
+                />
+                <div className="flex justify-between text-xs text-muted-foreground mt-1">
+                  <span>3 processes</span>
+                  <span>50 processes</span>
+                </div>
+              </div>
+
+              <Button
+                className="w-full bg-primary text-primary-foreground hover:bg-primary/90"
+                onClick={() => setCalculated(true)}
+              >
+                Calculate My ROI
+                <ArrowRight className="ml-2 h-4 w-4" />
+              </Button>
             </div>
           </div>
 
-          {/* Right: Code Block */}
+          {/* Right: Results */}
           <div>
-            <div className="rounded-xl border border-border bg-[#0a0d1a] overflow-hidden">
-              {/* Tabs */}
-              <div className="flex items-center gap-1 px-4 py-3 border-b border-border bg-card/50">
-                <div className="px-3 py-1.5 rounded-md bg-primary/10 text-xs font-medium text-primary">
-                  proof-example.ts
-                </div>
-                <div className="px-3 py-1.5 rounded-md text-xs font-medium text-muted-foreground hover:text-foreground transition-colors">
-                  root-contract.sol
-                </div>
+            <div
+              className={`rounded-2xl border p-8 transition-all duration-500 ${
+                calculated
+                  ? "border-primary bg-primary/5 shadow-[0_0_40px_rgba(72,230,200,0.15)]"
+                  : "border-border bg-card opacity-60"
+              }`}
+            >
+              <h3 className="text-xl font-bold mb-6 text-center">
+                {calculated ? "Your Estimated ROI" : "Your results will appear here"}
+              </h3>
+
+              <div className="grid grid-cols-2 gap-4 mb-6">
+                {[
+                  {
+                    label: "Investment Range",
+                    value: calculated ? `$${(processValue / 1000).toFixed(0)}K–$${(processValue * 1.5 / 1000).toFixed(0)}K` : "—",
+                    sub: "Implementation cost",
+                  },
+                  {
+                    label: "Annual Savings",
+                    value: calculated ? `$${(annualSavings / 1000).toFixed(0)}K` : "—",
+                    sub: "Year 1 documented savings",
+                  },
+                  {
+                    label: "First-Year ROI",
+                    value: calculated ? `${roi}%` : "—",
+                    sub: "Return on investment",
+                  },
+                  {
+                    label: "Payback Period",
+                    value: calculated ? `${paybackMonths} months` : "—",
+                    sub: "Time to break even",
+                  },
+                ].map((metric) => (
+                  <div
+                    key={metric.label}
+                    className="p-4 rounded-xl bg-background border border-border text-center"
+                  >
+                    <div className="text-2xl font-bold text-primary mb-1">{metric.value}</div>
+                    <div className="text-xs font-semibold text-foreground">{metric.label}</div>
+                    <div className="text-xs text-muted-foreground">{metric.sub}</div>
+                  </div>
+                ))}
               </div>
 
-              {/* Code */}
-              <div className="p-6 overflow-x-auto">
-                <pre className="text-sm leading-relaxed">
-                  <code className="text-foreground font-mono">
-                    {codeSnippet.split("\n").map((line, i) => (
-                      <div key={i} className="whitespace-pre">
-                        {line.includes("//") ? (
-                          <>
-                            <span className="text-muted-foreground">{line.split("//")[0]}</span>
-                            <span className="text-primary/70">// {line.split("//")[1]}</span>
-                          </>
-                        ) : line.includes("import") || line.includes("const") || line.includes("if") || line.includes("await") ? (
-                          <span className="text-secondary">{line}</span>
-                        ) : line.includes("identity:") || line.includes("action:") || line.includes("constraints:") ? (
-                          <span className="text-primary">{line}</span>
-                        ) : (
-                          <span>{line}</span>
-                        )}
-                      </div>
-                    ))}
-                  </code>
-                </pre>
-              </div>
-            </div>
+              {calculated && (
+                <div className="space-y-3">
+                  <p className="text-xs text-muted-foreground text-center">
+                    Estimates based on industry benchmarks. A readiness assessment will refine these
+                    numbers using your actual process data.
+                  </p>
+                  <Button className="w-full bg-primary text-primary-foreground hover:bg-primary/90" asChild>
+                    <a href="#assessment">
+                      Start Your Free Readiness Assessment
+                      <ArrowRight className="ml-2 h-4 w-4" />
+                    </a>
+                  </Button>
+                </div>
+              )}
 
-            <div className="mt-6 flex items-center gap-4">
-              <div className="flex items-center gap-2">
-                <div className="w-3 h-3 rounded-full bg-primary" />
-                <span className="text-sm text-muted-foreground">Client-side verification</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <div className="w-3 h-3 rounded-full bg-secondary" />
-                <span className="text-sm text-muted-foreground">On-chain settlement</span>
-              </div>
+              {!calculated && (
+                <p className="text-sm text-muted-foreground text-center">
+                  Select your industry, company size, and number of processes above to estimate your ROI.
+                </p>
+              )}
             </div>
           </div>
         </div>
